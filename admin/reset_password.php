@@ -1,1 +1,0 @@
-mangement password 
