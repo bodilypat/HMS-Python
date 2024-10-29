@@ -1,6 +1,88 @@
 <?php 
     require 'includes/dbconnects.php';
 
+    /* Management users function  */
+
+    function getUsers(){
+        $pdo = dbconnect();
+
+        $stmt = $pdo->prepare("SELECT id, username, role, created_at FROM users");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    function addUser($username, $password, $role){
+        $pdo = dbconnect();
+
+        // Hash the password 
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+        // Insert the new into the database
+        $stmt = $pdo->prepare("INSERT INTO users(username, password, role) VALUES(?, ?, ?) ");
+        $lastInsertId = $stmt->execute([$username, $password, $role]);
+        return $lastInsertId;
+    }
+
+    function deleteuUser($id) {
+        $pdo = dbconnect();
+
+        $stmt = $pdo->prepare("DELETE FROM users WHERE id = ? ");
+        $delUser = $stmt->execute([$d]);
+        return $delUser;
+    }
+
+
+    
+    function login($username, $password){
+        $pdo = dbconnect();
+
+        // Prepare SQL statement to prevent SQL injection 
+        $stmt = $pdo->prepare("SELECT id, password, role FROM users WHERE username = ? ");
+        $stmt->execute([$username]);
+        
+        // Fetch the user data 
+        $result = $stmt->fetch(PDO:FETCH_ASSOC);
+
+        // Check if user exists and verify  password
+        if($result && password_verify($password, $result['passord'])) {
+            // start session and store user information 
+            session_start();
+            $_SESSION['user_id'] = $result['id'];
+            $_SESSION['username'] = $username;
+            $_SESSION['role'] = $result['role'];
+
+            return true; // login successfully
+        } else {
+            return false; // login failed
+        }
+    }
+
+
+    function register($username, $password) {
+        $pdo = dbconnect();
+
+        // Check if the username already exists 
+        $stmt = $pdo->prepare("SELECT id FROM users where username = ? ");
+        $stmt->execute([$username]);
+        
+        if($stmt->rowCount() > 0 ) {
+            return "Username already exists. Please choose a different one.";
+        }
+
+        // Hash the password 
+        $hashedPassword = password_hash($password,PASSWORD_DEFAULT);
+
+        // Insert the new user into the database 
+        password_hash("INSERT INTO users(username, password) VALUES(?, ?) ");
+        $result = $stmt->execute([$username, $hashedPassword]);
+
+        if($result){
+            return "Registration Successfull!.";
+        } else {
+            return "Registration failed. please try again. ";
+        }
+    }
+
     /* Management  authors function */
     function addAuthor($name, $biography, $date_of_birth){
         $pdo = dbconnect();
