@@ -200,29 +200,30 @@ DB_CONFIG = {
     """
     
     def create_tables():
-        conn = mysql.connector.connect(**DB_CONFIG)
-        cursor = conn.cursor()
-        print("Connected to database.")
+        try:
+            conn = mysql.connector.connect(**DB_CONFIG)
+            cursor = conn.cursor()
+            print("Connected to database.")
         
-        for name, ddl in TABLES.items():
-            print(f"Creating table '{name}'...")
-            cursor.execute(ddl)
-            print(f" Table '{name}' created (or already exists).")
+            for name, ddl in TABLES.items():
+                print(f"Creating table '{name}'...")
+                cursor.execute(ddl)
+                print(f" Table '{name}' created (or already exists).")
             
-        conn.commit()
-        cursor.close()
-        conn.close()
-        print("All tables created successfully.")
+            conn.commit()
+            cursor.close()
+            conn.close()
+            print("All tables created successfully.")
         
-    except mysql.connector.Error as err:
-        if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
-            print(" Access denied. check your DB credentials.")
-        elif err.errno == errorcode.ER_BAD_DB_ERROR:
-            print(" Database does not exist.")
-        else:
-            print(f" Error: {err}")
-    except Exception as e:
-        print(f " Unexpected error: {e}")
+        except mysql.connector.Error as err:
+            if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+                print(" Access denied. check your DB credentials.")
+            elif err.errno == errorcode.ER_BAD_DB_ERROR:
+                print(" Database does not exist.")
+            else:
+                print(f" Error: {err}")
+        except Exception as e:
+            print(f " Unexpected error: {e}")
     
     # optional run
     if __name__ == "__main__":
