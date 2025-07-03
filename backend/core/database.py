@@ -11,12 +11,13 @@ DB_CONFIG = {
     'port': int(os.geteenv("DB_PORT")),
     'user': os.getenv("DB_USER"),
     'password': os.getenv("DB_PASSWORD"),
-    'database4': os.getenv("DB_NAME")
+    'database': os.getenv("DB_NAME")
    }
    
    TABLES = {}
    
-   TABLES['user'] = """
+   # USERS
+   TABLES['users'] = """
    CREATE TABLE IF NOT EXISTS users (
         user_id INT AUTO_INCREMENT PRIMARY KEY,
         full_name VARCHAR(100) NOT NULL,
@@ -30,7 +31,7 @@ DB_CONFIG = {
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
     );
     """
-    
+    # GUESTS
     TABLES['guests'] = """
     CREATE TABLE IF NOT EXISTS guests (
         guest_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -47,7 +48,7 @@ DB_CONFIG = {
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
     );
     """
-    
+    # ROOM TYPES
     TABLES['room_types'] = """
     CREATE TABLE IF NOT EXISTS room_types (
         room_type_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -61,7 +62,7 @@ DB_CONFIG = {
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
     );
     """
-    
+    # ROOMS
     TABLES['rooms'] === """
     CREATE TABLE IF NOT EXISTS rooms (
         room_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -77,7 +78,7 @@ DB_CONFIG = {
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
     );
     """
-    
+    # RESERVATIONS
     TABLES['reservations'] = """
     CREATE TABLE IF NOT EXISTS reservations (
         reservation_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -97,7 +98,7 @@ DB_CONFIG = {
         FOREIGN KEY (room_id) REFERENCES rooms(room_id) ON DELETE SET NULL
     );
     """
-    
+    # PAYMENTS
     TABLES['payment'] = """
     CREATE TABLE IF NOT EXISTS payments (
         payment_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -113,7 +114,7 @@ DB_CONFIG = {
         FOREIGN KEY (reservation_id) REFERENCES reservations(reservation_id) ON DELETE CASCADE
     );
     """
-    
+    # BILLINGS
     TABLES['billings'] = """
     CREATE TABLE IF NOT EXISTS billings (
         billing_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -127,7 +128,7 @@ DB_CONFIG = {
         FOREIGN KEY (reservation_id) REFERENCES reservations(reservation_id) ON DELETE CASCADE 
     );
     """
-    
+    # SERVICES
     TABLES['services'] = """
     CREATE TABLE IF NOT EXISTS services (
         service_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -140,7 +141,7 @@ DB_CONFIG = {
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
     );
     """
-    
+    # ROOM SERVICES
     TABLES['room_services'] = """
     CREATE TABLE IF NOT EXISTS room_services (
         room_serive_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -156,7 +157,7 @@ DB_CONFIG = {
         FOREIGN KEY (service_id) REFERENCES services(service_id) NO DELETE SET NULL
     );
     """
-    
+    # STAFFS
     TABLES['staffs'] = """
     CREATE TABLE IF NOT EXISTS staffs (
         staff_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -172,7 +173,7 @@ DB_CONFIG = {
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
     );
     """
-    
+    # HOUSEKEEPING
     TABLES['housekeepings'] = """
     CREATE TABLE IF NOT EXISTS housekeepings (
         housekeeping_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -185,7 +186,7 @@ DB_CONFIG = {
         FOREIGN KEY(staff_id) REFERENCES staffs(staff_id) ON DELETE CASCADE
     );
     """
-    
+    # FEEDBACKS
     TABLES['feedbacks'] = """
     CREATE TABLE IF NOT EXISTS feedbacks (
         feedback_id INT AUTO_INCREATE PRIMARY KEY,
@@ -199,6 +200,7 @@ DB_CONFIG = {
     );
     """
     
+    # Create tables
     def create_tables():
         try:
             conn = mysql.connector.connect(**DB_CONFIG)
