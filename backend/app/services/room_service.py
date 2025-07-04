@@ -63,7 +63,7 @@ class RoomService:
 	def get_room_price(room_id):
 		"""Return the base price per night of a room."""
 		room = RoomModel.get_room_by_id(room_id)
-		return room.get("price_per_night) if room else None 
+		return room.get("price_per_night") if room else None 
 		
 		
 	
