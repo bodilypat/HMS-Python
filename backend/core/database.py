@@ -6,17 +6,22 @@ import os
 # Load environment variables 
 load_dotenv(dotenv_path="config/.env")
 
+ # Setup Logger
+   logging.basicConfig(level=logging.INFO)
+   logger = logging.getLogger(__name__)
+
+# Database Configuration
 DB_CONFIG = {
     'host': os.getenv("DB_HOST"),
-    'port': int(os.geteenv("DB_PORT")),
+    'port': int(os.getenv("DB_PORT", 3306)),
     'user': os.getenv("DB_USER"),
     'password': os.getenv("DB_PASSWORD"),
     'database': os.getenv("DB_NAME")
    }
    
+   # SQL Table Definitions
    TABLES = {}
    
-   # USERS
    TABLES['users'] = """
    CREATE TABLE IF NOT EXISTS users (
         user_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -199,31 +204,35 @@ DB_CONFIG = {
         FOREIGN KEY (reservation_id) REFERENCES reservations(reservation_id) ON DELETE CASCADE
     );
     """
-  # Create Tables #  
-  def create tables():
-	try:
-		conn = mysql.connector.connect(**DB_CONFIG)
-		cursor = conn.cursor()
-		print("Connected to database.")
-		
-		for name, ddl in TABLES.items():
-			print(f"Creating table '{name}'...")
-			cursor.execue(ddl)
-			print(f" Table '{name}' created or already exists.")
-		conn.commit()
-		cursor.close()
-		conn.close()
-		print(" All tables created successfully.")
-		
-	except mysql.connector.Error as err:
-		if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
-			print(" Access denied. Check your DB credentials.")
-		elif err.errno == errorcode.ER_BAD_DB_ERROR:
-			print(" Database does not exist.")
-		else:
-			print(f" MySQL error: {err}")
-		except Exception as e:
-			print(f" Unexpected error: {e}")
-# Run items
-if __name__ == "__main__":
-	create_tables()
+    
+    # Create tables
+    def create_tables():
+        try:
+            conn = mysql.connector.connect(**DB_CONFIG)
+            cursor = conn.cursor()
+            print("Connected to database.")
+        
+            for name, ddl in TABLES.items():
+                print(f"Creating table '{name}'...")
+                cursor.execute(ddl)
+                print(f" Table '{name}' created (or already exists).")
+            
+            conn.commit()
+            cursor.close()
+            conn.close()
+            print("All tables created successfully.")
+        
+        except mysql.connector.Error as err:
+            if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+                print(" Access denied. check your DB credentials.")
+            elif err.errno == errorcode.ER_BAD_DB_ERROR:
+                print(" Database does not exist.")
+            else:
+                print(f" Error: {err}")
+        except Exception as e:
+            print(f " Unexpected error: {e}")
+    
+    # optional run
+    if __name__ == "__main__":
+        create_tables()
+        
