@@ -1,58 +1,58 @@
-from fastapi import APIRouter, HTTPException, Depends
-from typing import List
-from app.schemas.guest_schema import GuestCreateSchema, GuestReponseSchema
-from app.services.guest_service import GuestService
+# backend/app/controllers/guest_controller.py
+
+from fastapi import APIRouter, HTTPException, status
+from backend.app.services.guest_service import GuestService
+from backend.app.schemas.guest_schema import GuestCreate, GuestUpdate, GuestOut
 
 router = APIRouter(prefix="/guests", tags=["Guests"])
-guest_service = GuestService()
 
-@router.get("/", response_model=List[GuestReponseSchema])
+@router.get("/", response_model=List[GuestOut])
 def get_all_guests():
 	"""
-		Get a list of all guests.
+		Retrieve all guest records.
 	"""
-	guests = guest_service.get_all_guests()
+	guests = GuestService.get_all_guests()
 	return guests
 	
-@router.post("/", response_model=GuestReponseSchema, status_code=201)
-def create_guest(guest_data: GuestCreateSchema):
-	"""
-		Create a new guest.
-	"""
-	try:
-		return guest_service.create_guest(guest_data)
-	except ValueError as e:
-		raise HTTPException(status_code=400, detail=str(e))
-		
-@router.get("/{guest_id}", response_model=GuestReponseSchema)
+@router.get("/{guest_id}", response_model=GuestOut)
 def get_guest_by_id(guest_id: int):
 	"""
-		Get guest by ID.
+		Retrieve a guest by their unique ID.
 	"""
-	guest = guest_service.get_guest_by_id(guest_id)
+	guest = GuestService.get_guest_by_id(guest_id)
 	if not guest:
 		raise HTTPException(status_code=404, detail="Guest not found")
 	return guest
+
+@router.post("/", response_model=GuestOut, status_code=status.HTTP_201_CREATED)
+def create_guest(guest_data: GuestCreate):
+	"""
+		Create a new guest record.
+	"""
+    guest_id = GuestService.create_guest(guest_data.dict())
+    if not guest_id:
+        raise HTTPException(status_code=500, detail="Failed to create guest.")
+    return GuestService.get_guest_by_id(guest_id)	
 	
-@router.put("/{guest_id}", response_model=GuestReponseSchema)
-def update_guest(guest_id: int, guest_data:GuestCreateSchema):
+@router.put("/{guest_id}", response_model=GuestOut)
+def update_guest(guest_id: int, guest_data:GuestUpdate):
 	"""
-		Update guest by ID.
+		Update an existing guest's information.
 	"""
-	try: 
-		updated_guest = guest_service.update_guest(guest_id, guest_data)
-	if not updated_guest:
-		raise HTTPException(status_code=404, detail="Guest not found")
-	return ValueError as e:
-		raise HTTPException(status_code=400, detail=str(e))
+    success = GuestService.update_guest(guest_id, guest_data.dict(exclude_unset=True))
+    if not success:
+        raise HTTPException(status_code=404, detial="Guest not found or update failed.")
+    return GuestService.get_guest_by_id(guest_id)
 		
-@router.delete("/{guest_id}", status_code=204)
+@router.delete("/{guest_id}", status_code=status.204_NO_CONTENT)
 def delete_guest(guest_id: int)
 	"""
 		Delete guest by ID.
 	"""
-	success =  guest_service.delete_guest(guest_id)
+	success = GuestService.delete_guest(guest_id)
 	if not success:
-		raise HTTPException(status_code=404, detail="Guest not found")
+		raise HTTPException(status_code=404, detail="Guest not found or delete failed.")
+    return None
+    
 		
 		
