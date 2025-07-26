@@ -22,10 +22,10 @@ Fullstack-Hotel-Management-System/
 │   │   │   │   │   │   ├── reservation_controller.py
 │   │   │   │   │   │   └── payment_controller.py
 │   │   │   │   └── admin/
-│   │   │   │   	├── dashboard_controller.py    
-│   │   │   │   	├── staff_controller.py    
-│   │   │   │   	├── billing_controller.py    
-│   │   │   │   	├── feedback_controller.py      
+│   │   │   │       ├── dashboard_controller.py    
+│   │   │   │       ├── staff_controller.py    
+│   │   │   │       ├── billing_controller.py    
+│   │   │   │       ├── feedback_controller.py      
 │   │   │   │       └── room_service_controller.php  
 │   │   │   │
 │   │	├── models/                           
