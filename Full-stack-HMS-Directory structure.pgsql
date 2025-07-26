@@ -30,16 +30,16 @@ Fullstack-Hotel-Management-System/
 │   │   │   │
 │   │	├── models/                           
 │   │	│   ├── __init__py            
-│   │   │	├── base_model.py
-│   │   │	├── user.py
-│   │   │	├── guest.py
-│   │   │	├── booking.py
-│   │   │	├── room.py
-│   │   │	├── reservation.py
-│   │   │	├── payment.py
-│   │   │	├── staff.py
-│   │   │	├── room_service.py
-│   │   │	└── Feedback.py
+│   │   │   ├── base_model.py
+│   │   │   ├── user.py
+│   │   │   ├── guest.py
+│   │   │   ├── booking.py
+│   │   │   ├── room.py
+│   │   │   ├── reservation.py
+│   │   │   ├── payment.py
+│   │   │   ├── staff.py
+│   │   │   ├── room_service.py
+│   │   │   └── Feedback.py
 │   │   │
 │   │	├── services/                           
 │   │	│   ├── __init__.py       
