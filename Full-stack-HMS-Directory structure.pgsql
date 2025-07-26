@@ -12,7 +12,7 @@ Fullstack-Hotel-Management-System/
 │   │   │   │   ├── api/
 │   │  	│   │   │   ├── v1/       
 │   │ 	│   │   │   │   ├── auth/
-│   │   │	│   │   │   │   ├── login_controller.py
+│   │   │   │   │   │   │   ├── login_controller.py
 │   │   │	│   │   │   │   ├── logout_controller.py
 │   │   │	│   │   │   │   └── regisgter_controller.py
 │   │   │	│   │	│	├── user_controller.py
