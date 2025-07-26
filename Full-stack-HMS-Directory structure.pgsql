@@ -15,12 +15,12 @@ Fullstack-Hotel-Management-System/
 │   │   │   │   │   │   │   ├── login_controller.py
 │   │   │   │   │   │   │   ├── logout_controller.py
 │   │   │   │   │   │   │   └── regisgter_controller.py
-│   │   │	│   │	│	├── user_controller.py
-│   │   │	│   │	│	├── guest_controller.py
-│   │   │	│   │	│	├── booking_controller.py
-│   │   │	│   │	│	├── room__controller.py
-│   │   │	│   │	│	├── reservation_controller.py
-│   │   │	│	│	│	└── payment_controller.py
+│   │   │   │   │   │   ├── user_controller.py
+│   │   │   │   │   │   ├── guest_controller.py
+│   │   │   │   │   │   ├── booking_controller.py
+│   │   │   │   │   │   ├── room_controller.py
+│   │   │   │   │   │   ├── reservation_controller.py
+│   │   │   │   │   │   └── payment_controller.py
 │   │   │	│   └── admin/
 │   │   │	│   	├── dashboard_controller.py    
 │   │   │	│   	├── staff_controller.py    
