@@ -29,8 +29,9 @@ Fullstack-Hotel-Management-System/
 │   │   │   │       └── room_service_controller.php  
 │   │   │   │
 │   │	├── models/                           
-│   │	│   ├── __init__py            
-│   │   │   ├── base_model.py
+│   │	│   ├── __init__py        
+│   │	│   ├── core/           
+│   │   │   │   ├── base_model.py
 │   │   │   ├── user.py
 │   │   │   ├── guest.py
 │   │   │   ├── booking.py
