@@ -33,6 +33,7 @@ Fullstack-Hotel-Management-System/
 │   │	│   ├── core/           
 │   │   │   │   ├── base_model.py
 │   │   │   │   ├── user.py
+│   │   │   │   ├── guest.py
 │   │   │   │   └── staff.py
 │   │   │   ├── booking/
 │   │   │   │   ├── booking.py
