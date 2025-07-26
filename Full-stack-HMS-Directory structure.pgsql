@@ -8,13 +8,13 @@ Fullstack-Hotel-Management-System/
 │   │   │	└── setting.py
 │   │   │
 │   │   ├── controllers/
-│   │   │	├── base_controller.py       
-│   │   │	│	├── api/
-│   │  	│	│	│	├── v1/       
-│   │ 	│	│	│	│	├── auth/
-│   │   │	│   │	│	│	├── login_controller.py
-│   │   │	│   │	│	│	├── logout_controller.py
-│   │   │	│	│	│	│	└── regisgter_controller.py
+│   │   │   ├── base_controller.py       
+│   │   │	│   ├── api/
+│   │  	│	│	│   ├── v1/       
+│   │ 	│	│	│	│   ├── auth/
+│   │   │	│   │	│	│   ├── login_controller.py
+│   │   │	│   │	│	│   ├── logout_controller.py
+│   │   │	│	│	│	│   └── regisgter_controller.py
 │   │   │	│   │	│	├── user_controller.py
 │   │   │	│   │	│	├── guest_controller.py
 │   │   │	│   │	│	├── booking_controller.py
