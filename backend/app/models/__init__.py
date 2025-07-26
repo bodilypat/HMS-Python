@@ -14,11 +14,11 @@ __all__ = [
 	"Base",
 	"User",
 	"Guest",
-	"Booking",
+	"Staff",
+    "Booking",
 	"Room",
 	"Reservation",
 	"Payment",
-	"Staff",
 	"RoomService",
 	"Feedback",
 	]
