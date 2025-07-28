@@ -2,33 +2,13 @@ Fullstack-Hotel-Management-System/
 ├── backend/                              
 │   │     
 │   ├── app/                           
-│  	│	├── __init__.py                  
+│  	│	├── __init__.py       
+│  	│   │         
 │   │   ├── config/   
 │   │   │	├── __init__.py    
 │   │   │	└── setting.py
 │   │   │
-│   │   ├── controllers/
-│   │   │   ├── base_controller.py       
-│   │   │   │   ├── api/
-│   │  	│   │   │   ├── v1/       
-│   │ 	│   │   │   │   ├── auth/
-│   │   │   │   │   │   │   ├── login_controller.py
-│   │   │   │   │   │   │   ├── logout_controller.py
-│   │   │   │   │   │   │   └── regisgter_controller.py
-│   │   │   │   │   │   ├── user_controller.py
-│   │   │   │   │   │   ├── guest_controller.py
-│   │   │   │   │   │   ├── booking_controller.py
-│   │   │   │   │   │   ├── room_controller.py
-│   │   │   │   │   │   ├── reservation_controller.py
-│   │   │   │   │   │   └── payment_controller.py
-│   │   │   │   └── admin/
-│   │   │   │       ├── dashboard_controller.py    
-│   │   │   │       ├── staff_controller.py    
-│   │   │   │       ├── billing_controller.py    
-│   │   │   │       ├── feedback_controller.py      
-│   │   │   │       └── room_service_controller.php  
-│   │   │   │
-│   │	├── models/                           
+│   │	├── models/                                        # SQLAlchemy models       
 │   │	│   ├── __init__py        
 │   │	│   ├── core/           
 │   │   │   │   ├── base_model.py
@@ -42,11 +22,32 @@ Fullstack-Hotel-Management-System/
 │   │   │   │   ├── payment.py
 │   │   │   │   └── room_service.py
 │   │   │   ├── feedback/
-│   │   │   │   └── reservation.py
+│   │   │   │   └── feedback.py
 │   │   │   ├── guest/
 │   │   │   │   └── guest.py
 │   │   │   ├── room/
 │   │   │   │   └── room.py
+│   │   │   │
+│   │   ├── controllers/
+│   │   │   ├── base_controller.py       
+│   │   │   │   ├── api/
+│   │  	│   │   │   └── v1  
+│   │ 	│   │   │   	├── auth/
+│   │   │   │   │      	│   ├── login_controller.py
+│   │   │   │   │       │   ├── logout_controller.py
+│   │   │   │   │       │   └── regisgter_controller.py
+│   │   │   │   │       ├── user_controller.py
+│   │   │   │   │       ├── guest_controller.py
+│   │   │   │   │       ├── booking_controller.py
+│   │   │   │   │       ├── room_controller.py
+│   │   │   │   │       ├── reservation_controller.py
+│   │   │   │   │       └── payment_controller.py
+│   │   │   │   └── admin/
+│   │   │   │       ├── dashboard_controller.py    
+│   │   │   │       ├── staff_controller.py    
+│   │   │   │       ├── billing_controller.py    
+│   │   │   │       ├── feedback_controller.py      
+│   │   │   │       └── room_service_controller.php  
 │   │   │   │
 │   │	├── services/                           
 │   │	│   ├── __init__.py       
@@ -81,8 +82,7 @@ Fullstack-Hotel-Management-System/
 │   │
 │   ├── run.py 
 │   ├── requirements.txt
-│   └── index.php                         # API entry point (if using routing manually)
-│
+│   │
 ├── frontend/                             # Client-side application
 │   ├── pages/   
 │   │   ├── index.html  
