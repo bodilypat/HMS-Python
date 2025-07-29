@@ -6,7 +6,7 @@ Fullstack-Hotel-Management-System/
 │  	│   │         
 │   │   ├── config/   
 │   │   │	├── __init__.py    
-│   │   │	└── setting.py
+│   │   │	└── settings.py
 │   │   │
 │   │	├── models/                                        # SQLAlchemy models       
 │   │	│   ├── __init__py        
@@ -35,7 +35,7 @@ Fullstack-Hotel-Management-System/
 │   │ 	│   │   │   	├── auth/
 │   │   │   │   │      	│   ├── login_controller.py
 │   │   │   │   │       │   ├── logout_controller.py
-│   │   │   │   │       │   └── regisgter_controller.py
+│   │   │   │   │       │   └── register_controller.py
 │   │   │   │   │       ├── user_controller.py
 │   │   │   │   │       ├── guest_controller.py
 │   │   │   │   │       ├── booking_controller.py
@@ -47,7 +47,7 @@ Fullstack-Hotel-Management-System/
 │   │   │   │       ├── staff_controller.py    
 │   │   │   │       ├── billing_controller.py    
 │   │   │   │       ├── feedback_controller.py      
-│   │   │   │       └── room_service_controller.php  
+│   │   │   │       └── room_service_controller.py 
 │   │   │   │
 │   │	├── services/                           
 │   │	│   ├── __init__.py       
@@ -77,46 +77,55 @@ Fullstack-Hotel-Management-System/
 │   ├── tests/                            
 │   │   ├── __init__.py 
 │   │   ├── test_booking.py
-│   │   ├── test_au.py  
+│   │   ├── test_auth.py  
 │   │   └── test_user.py                   
 │   │
 │   ├── run.py 
-│   ├── requirements.txt
-│   │
-├── frontend/                             # Client-side application
-│   ├── pages/   
+│   └── requirements.txt
+│   
+├── frontend/                             
+│   ├── public/   
 │   │   ├── index.html  
-│   │   ├── booking.html
-│   │   ├── roomd.html 
-│   │   ├── feedback.html 
-│   │   ├── login.html 
-│   │   └── dashboard.html                       
-│   ├── css/  
-│   │   ├── main.css
-│   │   ├── booking.css 
-│   │   ├── dashboard.css   
-│   │   └── responsive.css                 
-│   ├── js/
-│   │   ├── main.js 
-│   │   ├── booking.js 
-│   │   ├── feedback.js 
-│   │   ├── auth.js    
-│   │   └── dashboard.js                  
+│   │   ├── favicon.ico
+│   │   └── assets/
+│   │   	├── images/  
+│   │   	└── icons/
+│   ├── src/  
+│   │   ├── App.js
+│   │   ├── index.js 
+│   │   └── routes/                                        # React Router Routes
+│   │   	└── ProtectRoute.js                 
+│   ├── pages/
+│   │   ├── Home.js 
+│   │   ├── Login.js 
+│   │   ├── Register.js 
+│   │   ├── Dashboard.js    
+│   │   ├── Booking.js    
+│   │   ├── Rooms.js    
+│   │   ├── Feedback.js    
+│   │   └── Profile.js                  
 │   ├── components/
-│   │   ├── header.html
-│   │   ├── footer.html
-│   │   └── room-card.html                    
-│   ├── images/ 
-│   │   ├── logo.png
-│   │   ├── rooms/
-│   │   └── icons/ 
-│   │       ├── checkin.svg  
-│   │       └── service.svg                     
-│   ├── assets/ 
-│   │   └── vendors/                  
+│   │   ├── Navbar.js
+│   │   ├── Footer.js
+│   │   ├── Sidebar.js
+│   │   ├── RoomCard.js
+│   │   └── BookingForm.js                    
+│   ├── services/ 
+│   │   ├── api.js                                         # Axios/fetch wrapper
+│   │   ├── authService.js
+│   │   └── bookingService.js                     
+│   ├── context/ 
+│   │   └── AuthContent.js 
+│   ├── styles/ 
+│   │   ├── main.css
+│   │   └── dashboard.css 
+│   ├── utils/ 
+│   │   ├── validators.js
+│   │   └── contants.js
 │   │    
 │   └── uploads/                           # Client-side uploads (optionsal)
 ├── .env                                   # Environment variables
 ├── .gitignore
+├── package.json
 │
 └── README.md
