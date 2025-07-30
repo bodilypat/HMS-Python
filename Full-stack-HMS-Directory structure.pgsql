@@ -8,7 +8,7 @@ Fullstack-Hotel-Management-System/
 │   │   │	├── __init__.py    
 │   │   │	└── settings.py
 │   │   │
-│   │	├── models/                                        # SQLAlchemy models       
+│   │	├── models/                                          # SQLAlchemy models       
 │   │	│   ├── __init__py        
 │   │	│   ├── core/           
 │   │   │   │   ├── base_model.py
@@ -31,7 +31,7 @@ Fullstack-Hotel-Management-System/
 │   │   ├── controllers/
 │   │   │   ├── base_controller.py       
 │   │   │   │   ├── api/
-│   │  	│   │   │   └── v1  
+│   │  	│   │   │   └── v1/  
 │   │ 	│   │   │   	├── auth/
 │   │   │   │   │      	│   ├── login_controller.py
 │   │   │   │   │       │   ├── logout_controller.py
