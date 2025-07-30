@@ -50,7 +50,7 @@ class GuestModel:
             return None
         try:
             cursor = conn.cursor(dictionary=True)
-            cursor.execute("SELECT * FROM guests WHERE guest_id = %s", (guest_id))
+            cursor.execute("SELECT * FROM guests WHERE guest_id = %s", (guest_id,))
             return cursor.fetchone()
             
         except Exception as e:
@@ -66,16 +66,16 @@ class GuestModel:
         conn = get_connection()
         if not conn:
             print("[GuestModel] Failed to connect to database.")
-            return None
+            return []
         
         try:
-            cursor = conn,cursor(dictionary=True)
-            cursor.execute("SELECT * FROM guests WHERE guest_id = %s", (guest_id))
-            return cursor.fetchone()
+            cursor = conn.cursor(dictionary=True)
+            cursor.execute("SELECT * FROM guests ")
+            return cursor.fetchall()
             
         except Exception as e:
             print("f[GustModel] Error fetching guest by ID: {e} ")
-            return None
+            return []
         finally:
             cursor.close()
             conn.close()
@@ -114,7 +114,7 @@ class GuestModel:
             cursor = conn.cursor()
             fields = ', 'join(f"{key} = %s" for key in update_date.keys())
             values = list(update_date.values()) + [guest_id]
-            sql = f" UPDATE guests SET {failed}  WHERE guest_id = %s")
+            sql = f" UPDATE guests SET {field}  WHERE guest_id = %s")
             cursor.excute(sql, values)
             conn.commit()
             
