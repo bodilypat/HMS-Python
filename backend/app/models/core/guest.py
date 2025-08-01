@@ -1,3 +1,5 @@
+# backend/app/models/core/guest.py 
+
 from backend.config.dbconnect import get_connection
 
 class GuestModel:
@@ -106,6 +108,7 @@ class GuestModel:
     @staticmethod 
     def update_guest(guest_, update_date: dict):
         """Update guest details by ID."""
+        conn = get_connection()
         if not conn:
             print("[GuestModel] Failed to connect to database.")
             return False
@@ -117,10 +120,14 @@ class GuestModel:
             sql = f" UPDATE guests SET {field}  WHERE guest_id = %s")
             cursor.excute(sql, values)
             conn.commit()
+            return cursor.rowCount > 0
             
         except Exception as e:
             print(f"[GuestModel] Error updating guest: {e}")
             return False
+        finally:
+            cursor.close
+            conn.close()
             
     @staticmethod 
     def delete_guest(guest_id):
@@ -128,7 +135,7 @@ class GuestModel:
         conn = get_connection()
         if not conn:
             print("GuestModel] Failed to connect to database.")
-            return false 
+            return False 
             
         try:
                 cursor = conn.cursor()
