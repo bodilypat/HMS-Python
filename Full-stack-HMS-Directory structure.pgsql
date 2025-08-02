@@ -2,13 +2,15 @@ Fullstack-Hotel-Management-System/
 ├── backend/                              
 │   │     
 │   ├── app/                           
-│  	│	├── __init__.py       
+│  	│	├── __init__.py  
+│  	│	├── main.py     									 # FastAPI app entry point
 │  	│   │         
-│   │   ├── config/   
-│   │   │	├── __init__.py    
-│   │   │	└── settings.py
+│   │   ├── config/                                          # Configuration & environment
+│   │   │	├── __init__.py   
+│   │   │	├── setting.py                                   # Pydantic settings
+│   │   │	└── database.py                                  # SQLAlchemy engine/session config
 │   │   │
-│   │	├── models/                                          # SQLAlchemy models       
+│   │	├── models/                                          # SQLAlchemy ORM models       
 │   │	│   ├── __init__py        
 │   │	│   ├── core/           
 │   │   │   │   ├── base_model.py
@@ -20,68 +22,92 @@ Fullstack-Hotel-Management-System/
 │   │   │   │   └── reservation.py
 │   │   │   ├── finance/
 │   │   │   │   ├── payment.py
-│   │   │   │   └── room_service.py
-│   │   │   ├── feedback/
-│   │   │   │   └── feedback.py
-│   │   │   ├── guest/
-│   │   │   │   └── guest.py
+│   │   │   │   └── billing.py
 │   │   │   ├── room/
-│   │   │   │   └── room.py
-│   │   │   │
-│   │   ├── controllers/
-│   │   │   ├── base_controller.py       
-│   │   │   │   ├── api/
-│   │  	│   │   │   └── v1/  
-│   │ 	│   │   │   	├── auth/
-│   │   │   │   │      	│   ├── login_controller.py
-│   │   │   │   │       │   ├── logout_controller.py
-│   │   │   │   │       │   └── register_controller.py
-│   │   │   │   │       ├── user_controller.py
-│   │   │   │   │       ├── guest_controller.py
-│   │   │   │   │       ├── booking_controller.py
-│   │   │   │   │       ├── room_controller.py
-│   │   │   │   │       ├── reservation_controller.py
-│   │   │   │   │       └── payment_controller.py
-│   │   │   │   └── admin/
-│   │   │   │       ├── dashboard_controller.py    
-│   │   │   │       ├── staff_controller.py    
-│   │   │   │       ├── billing_controller.py    
-│   │   │   │       ├── feedback_controller.py      
-│   │   │   │       └── room_service_controller.py 
-│   │   │   │
-│   │	├── services/                           
-│   │	│   ├── __init__.py       
-│   │	│   ├── auth_service.py                 
-│   │	│   ├── booking_service.py       
-│   │	│   ├── billing_service.py
-│   │	│   └── payment_service.py      
-│   │	│   
-│   │	├── routes/                           
-│   │	│   ├── __init__.py       
-│   │	│   ├── api.py                 
-│   │	│   └── web.py         
-│   │	│ 
-│   │	├── middleware/                                    
-│   │	│   └── auth_required.py  
-│   │	│   
-│   │	├── templates/                           
-│   │	│   ├── email/                      
-│   │	│   └── admin/   
-│   │	├── static/                                    
-│   │	│  
-│   │	├── uploads/                                    
-│   │	│   └── receipts/ 
-│   │	├── database.py                                    
-│   │   └── utils.py                                                  
+│   │   │   │   ├── room.py
+│   │   │   │   └── roomtype.py
+│   │   │   ├── service/
+│   │   │   │   ├── service.py
+│   │   │   │   └── room_service.py
+│   │   │   └── feedback.py
+│   │   │       └── feedback.py
+│   │   │  
+│   ├── schemas/                                           # Pydantic models(DTOS)
+│   │   ├── __init__.py       
+│   │   ├── user.py                 
+│   │   ├── guest.py       
+│   │   ├── booking.py
+│   │   ├── reservation.py                 
+│   │   ├── payment.py       
+│   │   ├── room.py
+│   │   ├── service.py                 
+│   │   └── feedback.py      
+│   ├── controllers/                                        # API logic (view layer)
+│   │   ├── __init__.py       
+│   │   ├── base.py                                         # Base controller logic
+│   │   ├── v1/        
+│   │   │  	├── auth/
+│   │   │  	│   ├── login.py
+│   │   │   │   ├── logout.py
+│   │   │   │   └── register.py
+│   │   │   ├── user.py
+│   │   │   ├── guest.py
+│   │   │   ├── booking.py
+│   │   │   ├── room.py
+│   │   │   ├── reservation.py
+│   │   │   ├── payment.py
+│   │   │   └── feedback.py
+│   │   └── admin/
+│   │       ├── dashboard.py    
+│   │       ├── staff.py    
+│   │       ├── billing.py    
+│   │       └── room_service.py 
+│   │   
+│   ├── services/                                         # Bussiness logic layer
+│   │   ├── __init__.py       
+│   │   ├── auth.py                 
+│   │   ├── booking.py       
+│   │   ├── billing.py
+│   │   ├── payment.py
+│   │   └── room_service.py      
+│   │   
+│   ├── routes/                           
+│   │   ├── __init__.py       
+│   │   ├── api.py                 
+│   │	└── web.py         
+│   │	 
+│  	├── middleware/                                    
+│  	│   └── auth_required.py  
+│  	│   
+│  	├── templates/                           
+│  	│   ├── email/                      
+│  	│   └── admin/   
+│  	├── static/                                    
+│  	│  
+│  	├── uploads/                                    
+│  	│   └── receipts/
+│  	│
+│   ├── utils/                           
+│   │   ├── __init__.py       
+│   │   ├── hash.py
+│   │   ├── jwt.py                 
+│   │	└── common.py                                                
 │   │
-│   ├── tests/                            
+│   ├── tests/                                   # Pytest or unittest structure
 │   │   ├── __init__.py 
-│   │   ├── test_booking.py
-│   │   ├── test_auth.py  
-│   │   └── test_user.py                   
+│   │   ├── auth/
+│   │   │   └── test_auth.py
+│   │   ├── booking/ 
+│   │   │   └── test_booking.py 
+│   │   ├── user/ 
+│   │   │   └── test_user.py
+│   │   ├── reservation/ 
+│   │   │   └── test_reservation.py
+│   │   └── room/    
+│   │       └── test_room.py                
 │   │
-│   ├── run.py 
-│   └── requirements.txt
+│   ├── run.py                                  # Entrypoint script 
+│   └── requirements.txt                        # Dependancies 
 │   
 ├── frontend/                             
 │   ├── public/   
@@ -90,12 +116,13 @@ Fullstack-Hotel-Management-System/
 │   │   └── assets/
 │   │   	├── images/  
 │   │   	└── icons/
-│   ├── src/  
-│   │   ├── App.js
-│   │   ├── index.js 
-│   │   └── routes/                                        # React Router Routes
-│   │   	└── ProtectRoute.js                 
-│   ├── pages/
+│   ├── src/                                    # Main source code
+│   │   ├── index.js                            # Entry point
+│   │   ├── App.js                              # Root component
+│   │   ├── routes/
+│   │   │   ├── index.js
+│   │   │   └── ProtectedRoute.js   
+│   ├── pages/                                  # Page-level components (screen views)
 │   │   ├── Home.js 
 │   │   ├── Login.js 
 │   │   ├── Register.js 
@@ -105,26 +132,31 @@ Fullstack-Hotel-Management-System/
 │   │   ├── Feedback.js    
 │   │   └── Profile.js                  
 │   ├── components/
-│   │   ├── Navbar.js
-│   │   ├── Footer.js
-│   │   ├── Sidebar.js
-│   │   ├── RoomCard.js
-│   │   └── BookingForm.js                    
-│   ├── services/ 
-│   │   ├── api.js                                         # Axios/fetch wrapper
+│   │   ├── common/
+│   │   │   ├── Navbar.js
+│   │   │   ├── Footer.js
+│   │   │   └── Sidebar.js 
+│   │   ├── booking/
+│   │   │   └── bookingForm.js
+│   │   └── rooms/     
+│   │   	└── RoomCard.js               
+│   ├── services/                               # API service layer (Axios, Fetch)
+│   │   ├── api.js                                         
 │   │   ├── authService.js
 │   │   └── bookingService.js                     
-│   ├── context/ 
+│   ├── context/                                # Global state 
 │   │   └── AuthContent.js 
-│   ├── styles/ 
+│   ├── hooks/                                  # Custom React hooks
+│   │   └── userAuth.js 
+│   ├── styles/                                 # Global and module-based styles
 │   │   ├── main.css
 │   │   └── dashboard.css 
-│   ├── utils/ 
+│   ├── utils/                                  # Utility functions and constants
 │   │   ├── validators.js
 │   │   └── contants.js
 │   │    
-│   └── uploads/                           # Client-side uploads (optionsal)
-├── .env                                   # Environment variables
+│   └── uploads/                                # Client-side uploads (optionsal)
+├── .env                                        # Environment variables
 ├── .gitignore
 ├── package.json
 │
