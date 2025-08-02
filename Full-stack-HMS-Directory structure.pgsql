@@ -2,13 +2,13 @@ Fullstack-Hotel-Management-System/
 ├── backend/                              
 │   │     
 │   ├── app/                           
-│  	│	├── __init__.py  
-│  	│	├── main.py     									 # FastAPI app entry point
-│  	│   │         
+│   │   ├── __init__.py  
+│   │   ├── main.py     									 # FastAPI app entry point
+│   │   │         
 │   │   ├── config/                                          # Configuration & environment
-│   │   │	├── __init__.py   
-│   │   │	├── setting.py                                   # Pydantic settings
-│   │   │	└── database.py                                  # SQLAlchemy engine/session config
+│   │   │   ├── __init__.py   
+│   │   │   ├── setting.py                                   # Pydantic settings
+│   │   │   └── database.py                                  # SQLAlchemy engine/session config
 │   │   │
 │   │	├── models/                                          # SQLAlchemy ORM models       
 │   │	│   ├── __init__py        
