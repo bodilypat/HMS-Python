@@ -47,7 +47,7 @@ Fullstack-Hotel-Management-System/
 │   │   ├── base.py                                         # Base controller logic
 │   │   ├── v1/        
 │   │   │   ├── auth/
-│   │   │  	│   ├── login.py
+│   │   │   │   ├── login.py
 │   │   │   │   ├── logout.py
 │   │   │   │   └── register.py
 │   │   │   ├── user.py
