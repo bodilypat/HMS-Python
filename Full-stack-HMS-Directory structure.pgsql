@@ -76,17 +76,17 @@ Fullstack-Hotel-Management-System/
 │   │   ├── api.py                 
 │   │	└── web.py         
 │   │	 
-│  	├── middleware/                                    
-│  	│   └── auth_required.py  
-│  	│   
-│  	├── templates/                           
-│  	│   ├── email/                      
-│  	│   └── admin/   
-│  	├── static/                                    
-│  	│  
-│  	├── uploads/                                    
-│  	│   └── receipts/
-│  	│
+│   ├── middleware/                                    
+│   │   └── auth_required.py  
+│   │   
+│   ├── templates/                           
+│   │   ├── email/                      
+│   │   └── admin/   
+│   ├── static/                                    
+│   │  
+│   ├── uploads/                                    
+│   │   └── receipts/
+│   │
 │   ├── utils/                           
 │   │   ├── __init__.py       
 │   │   ├── hash.py
