@@ -121,7 +121,7 @@ Fullstack-Hotel-Management-System/
 │   │   ├── App.js                              # Root component
 │   │	├── routes/                             # React Router configuration
 │   │	│   ├── index.js                        # Central route definitions
-│  	│   │   └── ProtectedRoute.js               # Auth guard wrapper
+│   │   │   └── ProtectedRoute.js               # Auth guard wrapper
 │   │   │ 
 │   ├── pages/                                  # Page-level components (screen views)
 │   │   ├── Home.js 
