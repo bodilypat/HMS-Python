@@ -121,13 +121,16 @@ Fullstack-Hotel-Management-System/
 │   │   ├── App.js                              # Root component
 │   │	├── routes/                             # React Router configuration
 │   │	│   ├── index.js                        # Central route definitions
-│   │   │   └── ProtectedRoute.js               # Auth guard wrapper
+│   │	│   ├── ProtecteRoute.js                # Auth guard wrapper
+│   │   │   └── RoleBaseRoute.js                # (Optional) RBAC support
 │   │   │ 
 │   ├── pages/                                  # Page-level components (screen views)
 │   │   ├── Home.js 
 │   │   ├── Login.js 
 │   │   ├── Register.js 
-│   │   ├── Dashboard.js    
+│   │   ├── Dashboard/
+│   │	│   ├── index.js  
+│   │   │   └── StatsWidget.js   
 │   │   ├── Booking.js    
 │   │   ├── Rooms.js    
 │   │   ├── Feedback.js    
@@ -144,7 +147,8 @@ Fullstack-Hotel-Management-System/
 │   ├── services/                               # API service layer (Axios, Fetch)
 │   │   ├── api.js                                         
 │   │   ├── authService.js
-│   │   └── bookingService.js                     
+│   │   ├── bookingService.js
+│   │   └── roomService.js                     
 │   ├── context/                                # Global state 
 │   │   └── AuthContent.js 
 │   ├── hooks/                                  # Custom React hooks
@@ -155,8 +159,12 @@ Fullstack-Hotel-Management-System/
 │   ├── utils/                                  # Utility functions and constants
 │   │   ├── validators.js
 │   │   └── contants.js
-│   │    
-│   └── uploads/                                # Client-side uploads (optionsal)
+│   │
+│   ├── uploads/    
+│   └── __tests__/                                # Client-side uploads (optionsal)
+│       ├── App.test.js                 
+│    	└── components/
+│           └── Navbar.test.js
 ├── .env                                        # Environment variables
 ├── .gitignore
 ├── package.json
