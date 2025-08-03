@@ -119,9 +119,10 @@ Fullstack-Hotel-Management-System/
 │   ├── src/                                    # Main source code
 │   │   ├── index.js                            # Entry point
 │   │   ├── App.js                              # Root component
-│   │   ├── routes/
-│   │   │   ├── index.js
-│   │   │   └── ProtectedRoute.js   
+│   ├── routes/                                 # React Router configuration
+│   │   ├── index.js                            # Central route definitions
+│   │   └── ProtectedRoute.js                   # Auth guard wrapper
+│   │ 
 │   ├── pages/                                  # Page-level components (screen views)
 │   │   ├── Home.js 
 │   │   ├── Login.js 
