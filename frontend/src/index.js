@@ -1,3 +1,4 @@
+/*  frontend/src/index.js */
 import React, { Suspense, lazy } from 'react';
 import { Routes, Route, Nevigate } from 'react-router-dom';
 import ProtectedRoute from '.ProtectedRoute';
@@ -37,4 +38,5 @@ const AppRoutes = () => {
 	);
 };
 export default AppRoutes;
+			
 			
