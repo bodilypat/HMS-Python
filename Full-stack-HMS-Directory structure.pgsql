@@ -29,17 +29,19 @@ Fullstack-Hotel-Management-System/
 │   │   │   ├── service/
 │   │   │   │   ├── service.py
 │   │   │   │   └── room_service.py
-│   │   │   └── feedback.py
+│   │   │   └── feedback/
 │   │   │       └── feedback.py
 │   │   │  
 │   ├── schemas/                                           # Pydantic models(DTOS)
 │   │   ├── __init__.py       
 │   │   ├── user.py                 
-│   │   ├── guest.py       
+│   │   ├── guest.py     
+│   │   ├── staff.py    
+│   │   ├── room.py  
 │   │   ├── booking.py
 │   │   ├── reservation.py                 
 │   │   ├── payment.py       
-│   │   ├── room.py
+│   │   ├── billing.py
 │   │   ├── service.py                 
 │   │   └── feedback.py      
 │   ├── controllers/                                        # API logic (view layer)
@@ -65,18 +67,19 @@ Fullstack-Hotel-Management-System/
 │   │   
 │   ├── services/                                         # Bussiness logic layer
 │   │   ├── __init__.py       
-│   │   ├── auth.py                 
-│   │   ├── booking.py       
-│   │   ├── billing.py
-│   │   ├── payment.py
-│   │   └── room_service.py      
+│   │   ├── auth_service.py                 
+│   │   ├── booking_service.py       
+│   │   ├── billing_service.py
+│   │   ├── payment_service.py
+│   │   └── room_service_hander.py      
 │   │   
 │   ├── routes/                           
 │   │   ├── __init__.py       
 │   │   ├── api.py                 
 │   │	└── web.py         
 │   │	 
-│   ├── middleware/                                    
+│   ├── middleware/  
+│   │   ├── __init__.py                                         
 │   │   └── auth_required.py  
 │   │   
 │   ├── templates/                           
@@ -90,11 +93,13 @@ Fullstack-Hotel-Management-System/
 │   ├── utils/                           
 │   │   ├── __init__.py       
 │   │   ├── hash.py
-│   │   ├── jwt.py                 
+│   │   ├── jwt.py         
+│   │   ├── logger.py.py            
 │   │	└── common.py                                                
 │   │
 │   ├── tests/                                   # Pytest or unittest structure
 │   │   ├── __init__.py 
+│   │   ├── conftest.py 
 │   │   ├── auth/
 │   │   │   └── test_auth.py
 │   │   ├── booking/ 
@@ -107,6 +112,7 @@ Fullstack-Hotel-Management-System/
 │   │       └── test_room.py                
 │   │
 │   ├── run.py                                  # Entrypoint script 
+│   ├── .env
 │   └── requirements.txt                        # Dependancies 
 │   
 ├── frontend/                             
