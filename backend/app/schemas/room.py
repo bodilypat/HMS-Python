@@ -1,4 +1,5 @@
-#backend/app/schemas/room.py
+# backend/app/schemas/room.py
+
 from pydantic import BaseModel, Field, constr, conint, PositiveInt, validator
 from typing import Optional
 from enum import Enum
@@ -7,7 +8,7 @@ from datetime import datetime
 # ENUMS
 class RoomStatus(str, Enum):
     available = "Available"
-    occupid = "Occupied"
+    occupied = "Occupied"
     maintenance = "Maintenance"
     
 # ROOM TYPE SCHEMAS
@@ -15,7 +16,7 @@ class RoomTypeBase(BaseModel):
     type_name: constr(min_length=1, max_length=50)
     description: Optional[str] = None
     base_price: float = Field(..., ge=0)
-    default_capacity: Positive = 1
+    default_capacity: PositiveInt = 1
     bed_count: PositionInt = 1
     amenities: Optional[str] = None 
     
@@ -28,6 +29,7 @@ class RoomTypeUpdate(RoomTypeBase):
 class RoomTypeOut(RoomTypeBase):
     room_type_id: int
     created_at: datetime
+    
     class Config:
         orm_mode = True
 
@@ -42,9 +44,9 @@ class RoomBase(BaseModel):
     beds_count: PositiveInt
     capacity: PositiveInt
     
-    @validate("capacity")
+    @validator("capacity")
     def validate_capacity(cls, v, value):
-        beds = values.gett("beds_count")
+        beds = values.get("beds_count")
         if beds and v < beds:
             raise ValueError("Capacity cannot be less than number of beds")
         return validate
@@ -53,7 +55,7 @@ class RoomBase(BaseModel):
         pass 
         
     class RoomUpdate(BaseModel):
-        floor_number: Optional[conint(get=0)]
+        floor_number: Optional[conint(ge=0)]
         price_per_night: Optional[float] = Field(None, ge=0)
         room_status: Optional[RoomStatus]
         room_description: Optional[str]
@@ -65,7 +67,8 @@ class RoomBase(BaseModel):
     def validate_updated_capacity(cls, v, values):
         if beds is not None and v is not None and v < beds:
             raise ValueError("Updated capacity cannot be less than umber of beds")
-            
+        return v
+        
     class RoomOut(RoomBase):
         room_id: int
         created_at: datetime
