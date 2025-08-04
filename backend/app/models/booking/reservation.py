@@ -123,3 +123,4 @@ class ReservationModel:
 		finally:
 			cursor.close()
 			conn.close()
+			
