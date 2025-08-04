@@ -87,10 +87,10 @@ Fullstack-Hotel-Management-System/
 │   │   │	└── admin/   
 │   │	├── static/                                    
 │   │   │
-│   │	├── uploads/                                    
+│   │   ├── uploads/                                    
 │   │   │	└── receipts/
 │   │   │
-│ 	│	├── utils/                           
+│   │   ├── utils/                           
 │   │   │	├── __init__.py       
 │   │   │	├── hash.py
 │   │   │	├── jwt.py         
@@ -109,7 +109,7 @@ Fullstack-Hotel-Management-System/
 │   │   	├── reservation/ 
 │   │   	│   └── test_reservation.py
 │   │   	└── room/    
-│   │       	└── test_room.py                
+│   │           └── test_room.py                
 │   │
 │   ├── run.py                                  # Entrypoint script 
 │   ├── .env
