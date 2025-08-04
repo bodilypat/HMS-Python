@@ -32,84 +32,84 @@ Fullstack-Hotel-Management-System/
 │   │   │   └── feedback/
 │   │   │       └── feedback.py
 │   │   │  
-│   ├── schemas/                                           # Pydantic models(DTOS)
-│   │   ├── __init__.py       
-│   │   ├── user.py                 
-│   │   ├── guest.py     
-│   │   ├── staff.py    
-│   │   ├── room.py  
-│   │   ├── booking.py
-│   │   ├── reservation.py                 
-│   │   ├── payment.py       
-│   │   ├── billing.py
-│   │   ├── service.py                 
-│   │   └── feedback.py      
-│   ├── controllers/                                        # API logic (view layer)
-│   │   ├── __init__.py       
-│   │   ├── base.py                                         # Base controller logic
-│   │   ├── v1/        
-│   │   │   ├── auth/
-│   │   │   │   ├── login.py
-│   │   │   │   ├── logout.py
-│   │   │   │   └── register.py
-│   │   │   ├── user.py
-│   │   │   ├── guest.py
-│   │   │   ├── booking.py
-│   │   │   ├── room.py
-│   │   │   ├── reservation.py
-│   │   │   ├── payment.py
-│   │   │   └── feedback.py
-│   │   └── admin/
-│   │       ├── dashboard.py    
-│   │       ├── staff.py    
-│   │       ├── billing.py    
-│   │       └── room_service.py 
-│   │   
-│   ├── services/                                         # Bussiness logic layer
-│   │   ├── __init__.py       
-│   │   ├── auth_service.py                 
-│   │   ├── booking_service.py       
-│   │   ├── billing_service.py
-│   │   ├── payment_service.py
-│   │   └── room_service_hander.py      
-│   │   
-│   ├── routes/                           
-│   │   ├── __init__.py       
-│   │   ├── api.py                 
-│   │	└── web.py         
-│   │	 
-│   ├── middleware/  
-│   │   ├── __init__.py                                         
-│   │   └── auth_required.py  
-│   │   
-│   ├── templates/                           
-│   │   ├── email/                      
-│   │   └── admin/   
-│   ├── static/                                    
-│   │  
-│   ├── uploads/                                    
-│   │   └── receipts/
-│   │
-│   ├── utils/                           
-│   │   ├── __init__.py       
-│   │   ├── hash.py
-│   │   ├── jwt.py         
-│   │   ├── logger.py.py            
-│   │	└── common.py                                                
-│   │
-│   ├── tests/                                   # Pytest or unittest structure
-│   │   ├── __init__.py 
-│   │   ├── conftest.py 
-│   │   ├── auth/
-│   │   │   └── test_auth.py
-│   │   ├── booking/ 
-│   │   │   └── test_booking.py 
-│   │   ├── user/ 
-│   │   │   └── test_user.py
-│   │   ├── reservation/ 
-│   │   │   └── test_reservation.py
-│   │   └── room/    
-│   │       └── test_room.py                
+│   │   ├── schemas/                                           # Pydantic models(DTOS)
+│   │   │    ├── __init__.py       
+│   │   │    ├── user.py                 
+│   │   │    ├── guest.py     
+│   │   │    ├── staff.py    
+│   │   │    ├── room.py  
+│   │   │    ├── booking.py
+│   │   │    ├── reservation.py                 
+│   │   │    ├── payment.py       
+│   │   │    ├── billing.py
+│   │   │    ├── service.py                 
+│   │   │    └── feedback.py      
+│   │   ├── controllers/                                        # API logic (view layer)
+│   │   │    ├── __init__.py       
+│   │   │    ├── base.py                                         # Base controller logic
+│   │   │    ├── v1/        
+│   │   │    │   ├── auth/
+│   │   │    │   │   ├── login.py
+│   │   │    │   │   ├── logout.py
+│   │   │    │   │   └── register.py
+│   │   │    │   ├── user.py
+│   │   │    │   ├── guest.py
+│   │   │    │   ├── booking.py
+│   │   │    │   ├── room.py
+│   │   │    │   ├── reservation.py
+│   │   │    │   ├── payment.py
+│   │   │    │   └── feedback.py
+│   │   │    └── admin/
+│   │   │        ├── dashboard.py    
+│   │   │        ├── staff.py    
+│   │   │        ├── billing.py    
+│   │   │        └── room_service.py 
+│   │   │
+│   │	├── services/                                         # Bussiness logic layer
+│   │   │	├── __init__.py       
+│   │   │ 	├── auth_service.py                 
+│   │   │	├── booking_service.py       
+│   │  	│	├── billing_service.py
+│   │   │	├── payment_service.py
+│   │   │	└── room_service_hander.py      
+│   │   │
+│   │	├── routes/                           
+│   │   │	├── __init__.py       
+│   │   │	├── api.py                 
+│   │	│	└── web.py         
+│   │	│ 
+│   │	├── middleware/  
+│   │   │	├── __init__.py                                         
+│   │   │	└── auth_required.py  
+│   │   │
+│   │	├── templates/                           
+│   │   │	├── email/                      
+│   │   │	└── admin/   
+│   │	├── static/                                    
+│   │   │
+│   │	├── uploads/                                    
+│   │   │	└── receipts/
+│   │   │
+│ 	│	├── utils/                           
+│   │   │	├── __init__.py       
+│   │   │	├── hash.py
+│   │   │	├── jwt.py         
+│   │   │	├── logger.py.py            
+│   │	│	└── common.py                                                
+│   │   │
+│   │	└── tests/                                      # Pytest or unittest structure
+│   │   	├── __init__.py 
+│   │   	├── conftest.py 
+│   │   	├── auth/
+│   │   	│   └── test_auth.py
+│   │   	├── booking/ 
+│   │   	│   └── test_booking.py 
+│   │   	├── user/ 
+│   │   	│   └── test_user.py
+│   │   	├── reservation/ 
+│   │   	│   └── test_reservation.py
+│   │   	└── room/    
+│   │       	└── test_room.py                
 │   │
 │   ├── run.py                                  # Entrypoint script 
 │   ├── .env
