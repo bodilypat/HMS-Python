@@ -1,4 +1,6 @@
-import datetie
+# backend/app/models/core/base_model.py
+
+import datetime
 from sqlalchemy import Column, DateTime, Integer 
 from sqlalchemy.ext.declarative import as_declarative, declared_attr
 
@@ -16,7 +18,7 @@ class Base:
         updated_at =  Column(DateTime, default=datetime.datetime.utcnow, onupdate=datetime.utcnow)
         
         def __repr__(self)-> str:
-            return f"<self.__class__.__name__}(id={self.id})>"
+            return f"<{self.__class__.__name__}(id={self.id})>"
             
             
             
