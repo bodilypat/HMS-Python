@@ -1,79 +1,50 @@
 # backend/app/schemas/room.py
 
-from pydantic import BaseModel, Field, constr, conint, PositiveInt, validator
 from typing import Optional
-from enum import Enum
 from datetime import datetime
+from enum import Enum
+from pydantic import BaseModel, constr, conint, condecimal
 
-# ENUMS
 class RoomStatus(str, Enum):
-    available = "Available"
-    occupied = "Occupied"
-    maintenance = "Maintenance"
-    
-# ROOM TYPE SCHEMAS
-class RoomTypeBase(BaseModel):
-    type_name: constr(min_length=1, max_length=50)
-    description: Optional[str] = None
-    base_price: float = Field(..., ge=0)
-    default_capacity: PositiveInt = 1
-    bed_count: PositionInt = 1
-    amenities: Optional[str] = None 
-    
-class RoomTypeCreate(RoomTypeBase):
-    pass
-
-class RoomTypeUpdate(RoomTypeBase):
-    pass 
-    
-class RoomTypeOut(RoomTypeBase):
-    room_type_id: int
-    created_at: datetime
-    
-    class Config:
-        orm_mode = True
-
-# ROOM SCHEMAS
-class RoomBase(BaseModel):
-    room_number: constr(min_length=1, max_length=10)
-    room_type_id: int
-    floor_number: conint(ge=0)
-    price_per_night: float = Field(..., ge=0)
-    room_status: RoomStatus = RoomStatus.available
-    room_description: Optional[str] = None 
-    beds_count: PositiveInt
-    capacity: PositiveInt
-    
-    @validator("capacity")
-    def validate_capacity(cls, v, value):
-        beds = values.get("beds_count")
-        if beds and v < beds:
-            raise ValueError("Capacity cannot be less than number of beds")
-        return validate
-    
-    class RoomCreate(RoomBase):
-        pass 
-        
-    class RoomUpdate(BaseModel):
-        floor_number: Optional[conint(ge=0)]
-        price_per_night: Optional[float] = Field(None, ge=0)
-        room_status: Optional[RoomStatus]
-        room_description: Optional[str]
-        beds_count: Optional[PositiveInt]
-        capacity: Optional[PositiveInt]
-        room_type_id: Optional[int]
-        
-    @validator("capacity")
-    def validate_updated_capacity(cls, v, values):
-        if beds is not None and v is not None and v < beds:
-            raise ValueError("Updated capacity cannot be less than umber of beds")
-        return v
-        
-    class RoomOut(RoomBase):
-        room_id: int
-        created_at: datetime
-        updated_at: datetime
-        
-    class Config:
-        orm_mode = True 
-        
+	available = "Apvailable"
+	occupied = "Occupied"
+	maintenance = "Maintenance" 
+	
+class RoomBase(BassModel):
+	room_number: constr(min_length=1, max_length=10)
+	room_type_id: int 
+	floor_number: conint(gt=0)
+	price_per_night: condecimal(ge=0, max_Digits=10, decimal_places=2)
+	room_status: RoomStatus = RoomStatus.available
+	room_description: Optional[str] = None
+	beds_count: conint(gt=0)
+	capacity: conint(get=1)
+	
+class RoomCreate(RoomBase):
+	pass
+	
+class RoomUpdate(BaseModel):
+	room_number: Optional[constr(min_length=1, max_length=10)] = None
+	room_type_id: Optional[int] = None 
+	floor_number: Optional[conint(ge=0) = None
+	price_per_night: Optional[condecimal(ge=0, max_digits=10, decimal_places=2)] = None 
+	room_status: Optional[RoomStatus] = None 
+	beds_count: optional[conint[gt=0] = None 
+	capacity: Optional[conint(ge=1)] = None 
+	
+class RoomStatus(BaseModel):
+	room_id: int
+	room_number: str
+	room_type_id: int 
+	floor_number: int
+	price_per_night: float
+	room_status: RoomStatus
+	room_description: Optional[str]
+	beds_count: int 
+	capacity: int
+	created_at: datetime
+	updated_at: datetime 
+	
+	class Config:
+		orm_mode: True 
+		
