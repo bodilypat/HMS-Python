@@ -3,7 +3,7 @@
 from datetime import date, datetime 
 from enum import Enum
 from typing import Optional
-from pydantic import BaseModel, conint, constr
+from pydantic import BaseModel, conint
 
 class ReservationStatus(str, Enum):
     pending = "Pending"
@@ -18,7 +18,7 @@ class PaymentStatus(str, Enum):
     partially_paid = "Partially Paid"
     refunded = "Refunded"
     
-class BookingSource(str, Enum)
+class BookingSource(str, Enum):
     website = "Website"
     phone = "Phone"
     walk_in = "Walk-in"
@@ -30,10 +30,10 @@ class ReservationBase(BaseModel):
     room_id: int 
     check_in: date 
     check_out: date
-    number_of_guests: comint(gt=0) = 1 
-    reservation_status: ReservationStatus = ReservatinStatus.pending
+    number_of_guests: conint(gt=0) = 1 
+    reservation_status: ReservationStatus = ReservationStatus.pending
     payment_status: PaymentStatus = PaymentStatus.pending
-    booking_source: BookingSourcee = BookingSource.website
+    booking_source: BookingSource = BookingSource.website
     special_request: Optional[str] = None 
     
 class ReservationCreate(ReservationBase):
@@ -64,5 +64,5 @@ class ReservationOut(BaseModel):
     created_at: datetime 
     updated_at: datetime 
     
-class config:
+class Config:
     orm_mode = True 
