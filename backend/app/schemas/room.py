@@ -6,7 +6,7 @@ from enum import Enum
 from pydantic import BaseModel, constr, conint, condecimal
 
 class RoomStatus(str, Enum):
-	available = "Apvailable"
+	available = "Available"
 	occupied = "Occupied"
 	maintenance = "Maintenance" 
 	
@@ -14,7 +14,7 @@ class RoomBase(BassModel):
 	room_number: constr(min_length=1, max_length=10)
 	room_type_id: int 
 	floor_number: conint(gt=0)
-	price_per_night: condecimal(ge=0, max_Digits=10, decimal_places=2)
+	price_per_night: condecimal(ge=0, max_digits=10, decimal_places=2)
 	room_status: RoomStatus = RoomStatus.available
 	room_description: Optional[str] = None
 	beds_count: conint(gt=0)
@@ -31,8 +31,9 @@ class RoomUpdate(BaseModel):
 	room_status: Optional[RoomStatus] = None 
 	beds_count: optional[conint[gt=0] = None 
 	capacity: Optional[conint(ge=1)] = None 
-	
-class RoomStatus(BaseModel):
+    
+
+class RoomOut(BaseModel):
 	room_id: int
 	room_number: str
 	room_type_id: int 
