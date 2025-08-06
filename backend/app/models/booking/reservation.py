@@ -1,6 +1,6 @@
-# backend/app/models/booking/reservation.py
+# backend/app/models/ReservationModel.py
 
-form backend.config.dbconnect import get_connection
+from backend.config.dbconnect import get_connection
 from typing import Optional, List, Dict, Any
 
 class ReservationModel:
@@ -123,4 +123,5 @@ class ReservationModel:
 		finally:
 			cursor.close()
 			conn.close()
+
 			
