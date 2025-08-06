@@ -1,10 +1,12 @@
+# backend/app/schemas/user.py 
+
 from datetime import datetime 
 from enum import Enum
 from pydamic import BaseModel, EmailStr, constr
 from typing import Optional
 
 class UserRole(str, Enum):
-	admin = "Amin"
+	admin = "Admin"
 	manager = "Manager"
 	receptionist = "Receptionist"
 	staff = "Staff"
@@ -31,6 +33,7 @@ class UserUpdate(BaseModel):
     email: Optional[EmailStr] = None 
     phone_number: Optional[constr(max_length=20)] = None
     role: Optional[UserStatus] = None 
+    status: Optional[UserStatus] = None
     password: Optional[constr(min_length=6, max_length=128)] = None
     
 class UserOut(BaseModel):
