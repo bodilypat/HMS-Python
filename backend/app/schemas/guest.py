@@ -1,8 +1,9 @@
 # backend/app/schemas/guest.py
+
 from datetime import date, datetime 
 from enum import Enum
 from typing import Optional
-from pydatic import BaseModel, constr, emailStr 
+from pydatic import BaseModel, constr, EmailStr 
 
 class IDType(str, Enum):
     passport = "Passport"
