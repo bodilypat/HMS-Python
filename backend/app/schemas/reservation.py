@@ -8,8 +8,8 @@ from pydantic import BaseModel, conint, constr
 class ReservationStatus(str, Enum):
     pending = "Pending"
     confirmed = "Confirmed"
-    check_in = "Check-in"
-    check_out = "Check-out"
+    check_in = "Check-In"
+    check_out = "Check-Out"
     cancelled = "Cancelled"
     
 class PaymentStatus(str, Enum):
@@ -22,7 +22,7 @@ class BookingSource(str, Enum)
     website = "Website"
     phone = "Phone"
     walk_in = "Walk-in"
-    travel_agency  = "Traval Agency"
+    travel_agency  = "Travel Agency"
     ota = "OTA"
     
 class ReservationBase(BaseModel):
@@ -37,15 +37,18 @@ class ReservationBase(BaseModel):
     special_request: Optional[str] = None 
     
 class ReservationCreate(ReservationBase):
-    check_in: Optional[date] = None 
-    check_out: Optional[date] = None
-    number_of_guests: Optional[conit(gt=0) = None 
-    reservation_status: Optional[PaymentStatus] = None 
-    booking_source: Optional[BookingSource] = None 
-    special_request: Optional[str] = None 
+    pass
     
-class ReservationCreate(ReservationBase0:
-    pass 
+class ReservationUpdate(BaseModel):
+    guest_id: Optional[int] = None
+    room_id: Optional[int] = None
+    check_in: Optional[date] = None 
+    check_out: Optional[date] = None 
+    number_of_guests: Optional[conint(gt=0)] = None
+    reservation_status: Optional[ReservationStatus] = None 
+    payment_status: Optional[PaymentStatus] = None
+    booking_source: Optional[BookingSource] = None 
+    special_request: Optional[str] = None
     
 class ReservationOut(BaseModel):
     reservation_id: int 
