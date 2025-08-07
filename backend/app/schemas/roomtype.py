@@ -9,7 +9,7 @@ class RoomTypeBase(BaseModel):
     description: Optional[str] = None 
     base_price: condecimal(ge=0, max_digits=10, decimal_places=2)
     default_capacity: conint(gt=0) = 1
-    bed_count: conint(get=0) = 1
+    bed_count: conint(ge=0) = 1
     amenities: Optional[str] = None 
     
 class, RoomTypeCreate(RoomTypeBase):
@@ -20,7 +20,7 @@ class RoomTypeUpdate(BaseModel):
     description: Optional[str] = None 
     base_price: Optional[condecimal(ge=0, max_digits=10, decimal_place=2)] = None 
     default_capacity: Optional[conint(gt=0)] = None
-    bed_count: Optional[conint(gt=0) = None
+    bed_count: Optional[conint(gt=0)] = None
     aminities: Optional[str] = None
     
 class RoomTypeOut(BaseModel):
