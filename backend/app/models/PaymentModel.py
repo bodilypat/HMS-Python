@@ -4,23 +4,28 @@ from backend.config.dbconnect import get_connection
 
 class PaymentModel:
 	@staticmethod
-	def create_payment(reservation_id, amount_paid, currency='USD', payment_method='Cash', payment_status='Pending, transaction_reference=None):
+	def create_payment( reservation_id, 
+                        amount_paid, currency='USD', 
+                        payment_method='Cash', 
+                        payment_status='Pending, 
+                        transaction_reference=None):
+                            
 		"""Insert a new payment into the database."""
 		conn = get_connection()
 		if not conn:
 			return None
 		try:
-			cursor = conn.cursor() as cursor:
+			with conn.cursor() as cursor:
 			sql = """
 				INSERT INTO payments (
 					reservation_id, amount_paid, currency, payment_method, payment_status, transaction_reference
 				) VALUES (%s, %s, %s, %s, %s, %s)
 			"""
-			values = (
-				cursor.execute(sql, values)
-				conn.commit()
-				return cursor.lastrowid 
-			execute Exception as e:
+			values = (reservation_id, amount_paid, currency, payment_method, payment_status, transaction_reference)
+			cursor.execute(sql, values)
+			conn.commit()
+			return cursor.lastrowid 
+			except Exception as e:
 				print(f" Error creating payment: {e}")
 				return None
 			finally:
@@ -34,12 +39,12 @@ class PaymentModel:
 		if not conn:
 			return None
 		try:
-			cursor = conn.cursor(dictionary=True) as cursor:
+			with conn.cursor(dictionary=True) as cursor:
 			cursor.execute("SELECT * FROM payments WHERE payment_id = %s", (payment_id,))
 			return cursor.fetchone()
 		except Exception as e:
 			print(f" Error fetching payment: {e}")
-		return None
+            return None
 		finally:
 			cursor.close()
 			conn.close()
@@ -49,7 +54,7 @@ class PaymentModel:
 		"""Get all payments associated with a reservation."""
 		conn = get_connection()
 		if not conn:
-			return []
+			return False 
 				
 		try: 
 			with conn.cursor(directory=True) as cursor:
