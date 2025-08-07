@@ -8,12 +8,12 @@ from paydantic import BaseModel, condecimal, constr
 class PaymentMethod(str, Enum):
 	credit_card = "Credit Card"
 	cash = "Cash"
-	online_transfer = "Oline Transfer"
+	online_transfer = "Online Transfer"
 	other = "Other"
 	
 class PaymentMethod(str, Enum):
     completed = "Completed"
-    pending = "Pendig"
+    pending = "Pending"
     failed = "Failed"
     
 class PaymentBase(BaseModel):
@@ -31,8 +31,8 @@ class PaymentCreate(PaymentBase):
 class PaymentUpdate(BaseModel):
     amount_paid: Optional[condecimal(ge=0, max_digits=10, decimal_places=2)] = None 
     currency: optional[constr(min_length=3, max_length=3)] = None 
-    is_actice: Optional[bool] = None 
-    payment_method: Optional[PaymentMEthod] = None 
+    is_active: Optional[bool] = None 
+    payment_method: Optional[PaymentMethod] = None 
     payment_status: Optional[PaymentStatus] = None
     transaction_reference: Optional[constr(max_length=100)] = None 
     
