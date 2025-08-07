@@ -9,7 +9,7 @@ class RoomServiceStatus(str, Enum):
 	requested = "Requested"
 	in_progress = "In Progress"
 	delivered = "Delivered"
-	cancekked = "Cancelled"
+	cancelled = "Cancelled"
 	
 class RoomServiceBase(BaseModel):
     reservation_id: int 
@@ -37,5 +37,5 @@ clas RoomServiceOut(BaseModel):
     updated_at: datetime
     
 class Config:
-    orm_mode True
+    orm_mode = True
     
