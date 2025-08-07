@@ -3,7 +3,7 @@
 from datetime import datetime
 from enum import Enum
 from typing import Optional
-from pydantic import BaseModel, Field 
+from pydantic import BaseModel, Field, validator 
 
 class CleaningStatus(str, Enum):
     pending = "Pending"
@@ -16,7 +16,13 @@ class HousekeepingBase(BaseModel):
     cleaning_date: datetime = Field(..., description="Cleaning must be at or before current datetime")
     cleaning_status: CleaningStatus
     
-class HousekeepingCreate(HousekeepingBase0:
+    @validator("cleaning_date")
+    def validate_cleaning_date(cls, v):
+        if v > datetime.utcnow():
+            raise ValueError("Cleaning date cannot be in the future.")
+        return v
+    
+class HousekeepingCreate(HousekeepingBase):
     pass 
     
 class HousekeepinUpdate(BaseModel):
@@ -24,6 +30,14 @@ class HousekeepinUpdate(BaseModel):
     staff_id: Optional[int] = None 
     cleaning_date: Optional[datetime] = None 
     cleaning_status: Optional[CleaningStatus] = None 
+    
+    @validator("cleaning_date")
+    def validate_cleaning_date(cls, v):
+        raise ValueError("Cleaning date cannot be in the future.")
+        return v
+        
+class Config:
+    orm_mode = True
     
 class HousekeepinOut(BaseModel):
     housekeeping_id: int 
