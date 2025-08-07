@@ -11,6 +11,9 @@ class FeedbackBase(BaseModel):
     comments: Optional[str] = None 
     feedback_date: Optional[datetime] = None 
     
+    class Config:
+        orm_mode = true
+    
 class FeedbackCreate(FeedbackBase):
     pass 
     
@@ -21,6 +24,9 @@ class FeedbackUpdate(BaseModel):
     comment: Optional[str] = None
     feedback_date: Optional[datetime] = None 
     
+    class Config:
+        orm_mode = True
+        
 class FeedbackOut(BaseModel):
     feedback_id: int 
     guest_id: int 
