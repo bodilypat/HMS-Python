@@ -26,7 +26,7 @@ class RoomServiceUpdate(BaseModel):
     service_status: Optional[RoomServiceStatus] = None 
     notes: Optional[str] = None 
     
-clas RoomServiceOut(BaseModel):
+class RoomServiceOut(BaseModel):
     room_service_id: int 
     reservation_id: int 
     service_id: int 
