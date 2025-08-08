@@ -56,7 +56,7 @@ class StaffModel:
             conn.close()
             
     @staticmethod 
-    def get_all staffs():
+    def get_all_staffs():
         """
            Retrieve all staffs members.
         """
@@ -70,7 +70,7 @@ class StaffModel:
             cursor.execute("SELECT * FROM staffs")
             return cursor.fetchall()
         except Exception as e:
-            print(f"[StaffModel] Error fetching all staff: {e})
+            print(f"[StaffModel] Error fetching all staff: {e}")
             return []
         finally:
             cursor.close()
@@ -81,6 +81,10 @@ class StaffModel:
         """
            Update staff member details by ID.
         """
+        if not update_data:
+            print("StaffModel] Database connection failed.")
+            return False 
+            
         conn = get_connection()
         if not conn:
             print("[StaffModel] Database connection failed.")
