@@ -22,6 +22,7 @@ class GuestModel:
 				INSERT INTO guests (
 					first_name, last_name, email, phone_number, address, id_type, id_number, dob, nationality
 				)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
             """
             values = (
                 first_name, last_name, email, phone_number, address, id_type, id_number, dob, natinality
@@ -37,7 +38,7 @@ class GuestModel:
 			conn.close()
 			
 	@staticmethod
-	def get_guest_by_id(guest_id)
+	def get_guest_by_id(guest_id):
 		"""
 			Retrieve a guest by ID. 
 		"""
@@ -62,10 +63,19 @@ class GuestModel:
         """
             Retrieve all guests.
         """
-        conn = get_connect()
+        conn = get_connection()
         if not conn:
             print(f"[GuestModel] Error fetching all guests: {e}")
             return []
+            
+        try:
+            cursor = conn.cursor(dictionary=True)
+            cursor.execute("SELECT * FROM guests")
+            return cursor.fetchall()
+        except Exception as e:
+            print(f"[GuestModel] Error fetching all guests: {e}"}
+            return []
+            
         finally:
             cursor.close()
             conn.close()
@@ -77,6 +87,10 @@ class GuestModel:
             print("[GuestModel] No update data provided. ")
             return False 
         
+        conn = get_connection()
+        if not conn:
+            print("[GuestModel] Database connection failed.")
+            return False
         try:
             cursor = conn.cursor()
             fields = ', '.join(f"{key} = %s" for key in update_data.keys())
@@ -88,6 +102,9 @@ class GuestModel:
         except Exception as e:
             print(f"[GuestModel] Error updating guest: {e}")
             return False 
+        finally:
+            cursor.close()
+            conn.close()
             
     @staticmethod 
     def delete_guest(guest_id):
