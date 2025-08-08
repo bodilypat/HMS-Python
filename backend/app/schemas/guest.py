@@ -7,12 +7,12 @@ from pydatic import BaseModel, constr, EmailStr
 
 class IDType(str, Enum):
     passport = "Passport"
-    national_id = "National_ID"
-    driver_license = "Drive Lincence"
+    national_id = "National ID"
+    driver_license = "Drive Lincense"
     
 class GuestBase(BaseModel):
     first_name: constr(min_length=1, max_length=100)
-    last_name: constr(min_length=1, amax_length=100)
+    last_name: constr(min_length=1, max_length=100)
     email: EmailStr 
     phone_number: Optional[constr(max_length=20)] = None
     address: Optional[str] = None 
