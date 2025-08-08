@@ -72,3 +72,4 @@ def register(user_in: user_schemas.UserCreate, db: Session = Depends(get_db)):
             "token_type": "bearer",
         }
         
+        
