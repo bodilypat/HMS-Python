@@ -2,7 +2,7 @@
 
 from fastapi import APIRouter, Depends, HTTPException, status 
 from sqlalchemy.orm import Session
-from typing import get_db 
+from typing import List
 
 from app.schemas import guest as guest_schemax
 from app.services import guest_service
@@ -10,21 +10,21 @@ from app.api.deps import get_db
 
 router = APIRouter(prefix="/guests", tags=["Guests"])
 
-@router.post("/", response_model=guest_chemas.GuestOut, status_code=status.HTTP_201_CREATED)
+@router.post("/", response_model=guest_schemas.GuestOut, status_code=status.HTTP_201_CREATED)
 def create_guest(guest_in: guest_schemax.GuestCreate, db: Session = Depends(get_db)):
     """
         Create a new guest record.
     """
     return guest_service.create_guest(db, guest_in)
     
-@router.get("/", response_model=List[guest_schemas.GuestOut)
+@router.get("/", response_model=List[guest_schemax.GuestOut)
     def get_all_guest(skip: ,int = 0, limit: int = 20, db: Session = Depends(get_db)):
         """
             Retrieve all guest records (paginated).
         """
         return guest_service.get_guest(db, skip=skip, limit=limit)
         
-@router.get("/{guest_id}", response_model=guest_schemas.GuestOut)
+@router.get("/{guest_id}", response_model=guest_schemax.GuestOut)
     def get_guest_by_id(guest_id: int, db: Session = Depends(get_db):
     """
         Retrieve a single guest by ID.
@@ -34,7 +34,7 @@ def create_guest(guest_in: guest_schemax.GuestCreate, db: Session = Depends(get_
         raise HTTPException(status_code=404, detail="Guest not found")
     return guest 
 
-@router.put("/{guest_id}", response_model=guestt_schemas.GuestOut)
+@router.put("/{guest_id}", response_model=guestt_schemax.GuestOut)
     def update_guest(guest_id: int, guest_in: guest_schemax.GuestUpdate, db: Session = Depends(get_db)
     """
         Update an exiting guest.
