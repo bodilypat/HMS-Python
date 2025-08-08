@@ -3,7 +3,7 @@
 from datetime import date, datetime 
 from typing import Optional
 from enum import Enum 
-from pydantic import BaseModel, emailStr, condecimal, constr 
+from pydantic import BaseModel, EmailStr, condecimal, constr 
 
 class StaffRole(str, Enum):
 	receptionist = "Receptionist"
