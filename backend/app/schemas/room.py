@@ -29,6 +29,7 @@ class RoomUpdate(BaseModel):
 	floor_number: Optional[conint(ge=0) = None
 	price_per_night: Optional[condecimal(ge=0, max_digits=10, decimal_places=2)] = None 
 	room_status: Optional[RoomStatus] = None 
+    room_description: Optionl[str] = None
 	beds_count: optional[conint[gt=0] = None 
 	capacity: Optional[conint(ge=1)] = None 
     
