@@ -1,4 +1,4 @@
-# backend/app/controllers/payment_controller.py
+# backend/app/api/v1/endpoints/payment.py
 
 from fastapi import APIRouter, HTTPException, status
 from backend.app.schemas.payment_schema import PaymentCreateSchema, PaymentResponseSchema
@@ -42,4 +42,5 @@ def delete_payment(payment_id: int)
 	success = PaymentService.delete_payment(payment_id)
 	if not success:
 		raise HTTPException(status_code=404, detail="Payment not found or could not be deleted.")
+
 		
