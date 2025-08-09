@@ -4,10 +4,13 @@ from fastapi import APIRouter
 from .endpoints import ( auth, user, guest, staff, room, reservation, payment, billing, feedback, service )
     router = APIRouter()
     
+    # Atuhentication & User Management
     router.include_router(auth.router, prefix="/auth", tags=["Auth"])
     router.include_router(user.router, prefix="/users", tags=["users"])
     router.include_router(guest.router, prefix="/guests", tags=["Guests"])
     router.include_router(staff.router, prefix="/staff", tags=["Staff"])
+    
+    # Hotel Services 
     router.include_router(room.router, prefix="/rooms", tags=["Rooms"])
     router.include_router(reservation.router, prefix="/reservation", tags=["Reservations"])
     router.include_router(payment.router, prefix="/payments", tags=["Payment"])
