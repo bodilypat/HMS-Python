@@ -2,7 +2,7 @@
 
 from fastapi import APIRouter, Depends, HTTPException, status 
 from sqlalchemy.orm import Session
-from styping import List
+from typing import List
 
 from backend.app.schemas.reservation import(
 		ReservationCreate,
@@ -17,7 +17,7 @@ router = APIRouter(
 	tags=["Reservations"]
 	)
 	
-	@router.post("/", reservation_model=ReservationOut, status_Code=Status.HTTP_201_CREATE)
+	@router.post("/", reservation_model=ReservationOut, status_Code=Status.HTTP_201_CREATED)
 	def create_reservation(
 		reservation_in: ReservationCreate,
 		db: Session = Depends(get_db)
