@@ -107,15 +107,18 @@ class ReservationModel:
             conn.close()
          
 	@staticmethod	
-	def update_reservation(reservation_id: int, **fields) -> bool:
+	def update_reservation(reservation_id: int, fields: Dict[str, Any]) -> bool:
 		"""Update reservation with provided fields."""
 		if not fields:
 			return False 
 		
+        conn = get_connection()
+        if not conn:
+            return False 
+            
 		try:
             columns = ", ".join([F"{key} = %s", for key in fields.keys()])
             values = list(fields.values()) + [reservation_id]
-            
 			cursor = conn.cursor()
 			query = f"UPDATE reservations SET {columns} WHERE reservation_id = %s"
             cursor.execute(query, values)
@@ -133,11 +136,10 @@ class ReservationModel:
         """
            Update reservation status.
         """
-        return ReservationModel.update_reservation(reservation_id, reservation_status=new_status)
+        return ReservationModel.update_reservation_by_id(reservation_id, {"reservation_status" : new_status})
         
 	@staticmethod
 	def delete_reservation(reservation_id: int) -> bool:
-        
 		"""Delete a reservation by ID."""
 		conn = get_connection()
 		if not conn:
@@ -154,4 +156,34 @@ class ReservationModel:
 		finally:
 			cursor.close()
 			conn.close()
-			
+    
+    @staticmethod
+    def find_overlapping_reservation(room_id: int, check_id: date, check_out: date) -> List[Dict[str, Any]]:
+        """
+            Find overlapping reservations for a room between given dates.
+        """
+        con = get_connection()
+        if not conn:
+            return []
+            
+        try:
+            cursor = conn.cursor(dictionary=True)
+            sql = """
+                SELECT * FROM reservations
+                WHERE room_id = %s AND (
+                    (check_in < %s AND check_out > %s) OR 
+                    (check_in >= %s AND check_in < %s)
+                )
+                AND reservation_status IN ('Confirmed', 'Check-In')
+            """
+            cursor.execute(sql, (room_id, check_out, check_in, check_out))
+            return cursor.fetchall()
+        except Exception as e:
+            print(f"[Error] Failed to find overlapping reservation: {e}")
+            return []
+        finally:
+            cursor.close()
+            conn.close()
+            
+            
+        
