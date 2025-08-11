@@ -1,10 +1,14 @@
 # backend/app/services/reservation_service.py
 
+from datetime import date 
+from typing import Optional , List, Dict 
+
 from datetime import datetime
 from backend.app.models.room.model import RoomModel
 from backend.app.models.guest.model  import GuestModel
 from backend.app.models.billing_model import BillingModel 
 from backend.app.models.payment_model import PaymentModel 
+from backend.app.models.reservation_model import ReservatioModel 
 
 class ReservationService:
 
@@ -24,21 +28,31 @@ class ReservationService:
         booking_source = data.get("booking_sourece", "website")
         special_request = data.get("special_reques")
         
+        if not all([guest_id, room_id, check_in, check_out):
+            raise ValueError("Missing required reservation fields.")
+            
         # Validate room availability
         if room_id and not ReservationService.check_availability(room_id, check_in, check_out):
             raise ValueError("Room is not available for the selected dates.")
             
         #Create reservation
         reservation_id = ReservationModel.create_reservation(
-            guest_id, room_id, check_in, check_out,
-            number_of_quests, reservation_status, payment_status,
-            booking_source, special_request
+            guest_id = guest_id,
+            room_id = room_id,
+            check_in = check_in,
+            check_out = check_out,
+            number_of_quests = number+of_guests,
+            reservation_status = servation_status, 
+            payment_status = payment_status,
+            booking_source = booking_source, 
+            special_request = special_request 
         )
+        
         if not reservation_id:
             return None 
             
         # Update room status if applicate 
-        if reservation_status in ("Confirmed", "check-In") and room_id:
+        if reservation_status in ("Confirmed", "check-In")
             RoomModel.update_room_status(room_id,"Occupied")
             
         return ReservationModel.get_reservation_by_id(reservation_id)
@@ -55,14 +69,17 @@ class ReservationService:
         """
             Retrieve all reservation in the system.
         """
-        return Reservation.get_all_reservations()
+        return ReservationModel.get_all_reservations()
         
     @staticmethod
-    def update_reservation(reservation_id: update_date: dict) -> Optional[dict]:
+    def update_reservation(reservation_id: int, update_date: dict) -> Optional[dict]:
         """
             Update reservation details.
         """
-        succes = ReservationModel.update_reservation_by_id(reservation_id)
+        success = ReservationModel.update_reservation_by_id(reservation_id, update_data)
+        if success:
+            return ReservationModel.get_reservation_by_id(reservation_id)
+        return None 
         
     @staticmethod
     def cancel_reservation(reservation_id: int) -> bool:
@@ -73,10 +90,11 @@ class ReservationService:
         if not reservation:
             return False 
         
-        success = ReservatioModel.update_reservation(
+        success = ReservatioModel.update_reservation_by_id(
             reservation_id,
             reservation_status="Cancelled"
         )
+        
         if success and reservation.get("room_id"):
             RoomModel.update_room_status(reservation["room_id"], "Available")
             
