@@ -25,6 +25,9 @@ class PaymentBase(BaseModel):
     payment_status: PaymentStatus = PaymentStatus.pending
     transaction_reference: Optional[constr(max_length=100)] = None
     
+    class Config:
+        orm_mode = True
+    
 class PaymentCreate(PaymentBase):
     pass
     
@@ -35,6 +38,9 @@ class PaymentUpdate(BaseModel):
     payment_method: Optional[PaymentMethod] = None 
     payment_status: Optional[PaymentStatus] = None
     transaction_reference: Optional[constr(max_length=100)] = None 
+    
+    class Config:
+        orm_mode = Ture
     
 class PaymentOut(BaseModel):
     payment_id: int 
