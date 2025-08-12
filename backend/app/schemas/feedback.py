@@ -2,14 +2,14 @@
 
 from datetime import datetime
 from typing import Optional
-from pydantic import BaseModel,  Field, conint 
+from pydantic import BaseModel, Field, conint 
 
 class FeedbackBase(BaseModel):
-    guest_id: int 
-    reservation_id: int 
+    guest_id: int = Field(..., description="ID of the guest giving feedback")
+    reservation_id: int = Field(..., description="ID of the reservatin")
     rating: conint(get=1, le=50 = Field(..., description="Rating must be between 1 and 5")
-    comments: Optional[str] = None 
-    feedback_date: Optional[datetime] = None 
+    comments: Optional[str] = Field(None, description="Optional comments")
+    feedback_date: Optional[datetime] = Field(None, description="Optional feedback date (defaults to now)")
     
     class Config:
         orm_mode = true
@@ -18,11 +18,11 @@ class FeedbackCreate(FeedbackBase):
     pass 
     
 class FeedbackUpdate(BaseModel):
-    guest_id: Optional[int] = None 
-    reservation_id: Optional[int] = None 
-    rating: Optional[conint(get=1, le=5)] = None 
-    comment: Optional[str] = None
-    feedback_date: Optional[datetime] = None 
+    guest_id: Optional[int] = Field(None, description="Updated quest ID")
+    reservation_id: Optional[int] = Field(None, description="Updated reservation ID")
+    rating: Optional[conint(ge=1, le=5)] = Field(None, description="Updated rating between 1 and 5")
+    comment: Optional[str] = Field(None, description="Updated comments")
+    feedback: Optional[datetime] = Field(None, description(None, description="Updated feedback date")
     
     class Config:
         orm_mode = True
