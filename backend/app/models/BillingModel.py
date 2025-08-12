@@ -7,14 +7,16 @@ class BillingModel:
 
 	@staticmethod
 	def create_billing( 
-                        reservation_id, 
-                        service_charge=0.00, 
-                        discount=0.00, 
-                        total_amount=0.00, 
-                        payment_status='Unpaid')
-                ) -> Optional[int]:
+            reservation_id, 
+            service_charge=0.00, 
+            discount=0.00, 
+            total_amount=0.00, 
+            payment_status='Unpaid')
+        ) -> Optional[int]:
                     
-		"""Insert a new billing record."""
+		"""
+            Insert a new billing record.
+        """
 		conn = get_connection()
 		if not conn:
 			return None
@@ -25,20 +27,22 @@ class BillingModel:
 				    INSERT INTO billings ( reservation_id, service_charge, discount, total_amount, payment_status )
 				    VALUES (%s, %s, %s, %s, %s)
 			     """
-			values = ( reservation_id, service_charge, discount, total_amount, payment_status )
+			values = (reservation_id, service_charge, discount, total_amount, payment_status )
 			cursor.execute(sql, values)
 			conn.commit()
 			return cursor.lastrowid
 		except Exception as e:
-			print(f " Error creating billing: {e}")
+			print(f "[Error] Creating billing: {e}")
 			return None
 		finally:
 			cursor.close()
 			conn.close()
 			
 	@staticmethod
-	def get_billing_by_reservation(reservation_id);
-		"""Fetch billing info for a reservation."""
+	def get_billing_by_reservation(reservation_id: int) -> Optional[Dict[str, Any]]:
+		"""
+            Fetch billing info for a reservation.
+        """
 		conn = get_connection()
 		if not conn:
 			return None
@@ -48,7 +52,7 @@ class BillingModel:
 			cursor.execute("SELECT * FROM billings WHERE reservation_id = %s", (reservation_id,))
 			return cursor.fetchone()
 		except Exception as e:
-			print(f" Error fetching billing: {e}")
+			print(f"[Error] Fetching billing: {e}")
 			return None
 		finally:
 			cursor.close()
@@ -56,14 +60,16 @@ class BillingModel:
 			
 	@staticmethod
 	def update_billing(
-                billing_id: int, 
-                service_charge: Optional[float] =None,
-                discount: Optional[float] = None,
-                total_amount: Optional[float] = None, 
-                payment_status: Optional[str] = None
-            ) -> bool:
+            billing_id: int, 
+            service_charge: Optional[float] =None,
+            discount: Optional[float] = None,
+            total_amount: Optional[float] = None, 
+            payment_status: Optional[str] = None
+        ) -> bool:
                 
-		"""Update billing information selectively."""
+		"""
+            Update billing information selectively.
+        """
 		conn = get_connection()
 		if not conn:
 			return False
