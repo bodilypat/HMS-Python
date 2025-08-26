@@ -1,38 +1,37 @@
 # backend/app/main.py
 
 from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware 
+from fastapi.middleware.cors import CORSMiddleware
+from app.routes.api import api_router
+from app.config.database import create_db_and_tables
 
-from app.routes import api
-from app.config.database import Base, engine
-from app.config.setting import settings 
-
-def create_app() -> FastAPI:
-	"""
-        Initialize FastAPI application.
-    """
-    
-# Middleware setup 
-    app.add_middleware(
+# FastAPI app instance
+app = FastAPI(
+               title="Hotel Management System API",
+               version="1.0.0",
+               description="Backend API for managing hotel operations (rooms, booking, users, etc.')"
+            )
+            
+# CORS middleware setup
+app.add_middleware(
         CORSMiddleware,
-        allow_origins=["*"],
+        allow_origins=["*"], # Change to your frontend URL in production 
         allow_credentials=True,
         allow_method=["*"],
-        allow_headers=["*"],
+        allow_headers["*"],
     )
     
-# Include register API routes
-    app.include_router(api.router)
+# API router registration
+app.include_router(api_router, prefix="/api/v1")
+
+# App startup event
+@app.on.event("startup")
+async def startup():
+    print("Starting up Hotel Management System API...")
+    create_db_and_tables()
+    print("Database initialized and connected")
     
-    return app
-
-app = create_app()
-
-# Run database table creation(avoid in production-use alembic migrations )
-@app.on_event("startup")
-def on_startup():
-    print("Creating database tables (if not exists) ...")
-    Base.metadata.create_all(bind=engine)
-
-
-    
+    @app.on_event("shutdown")
+    async def shutdown():
+        print("Shutting down Hotel Management System API...")
+        
