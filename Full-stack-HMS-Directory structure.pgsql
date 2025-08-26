@@ -4,98 +4,139 @@ Fullstack-Hotel-Management-System/
 │   ├── app/                           
 │   │   ├── __init__.py  
 │   │   ├── main.py     									 # FastAPI app entry point
+│   │   ├── config.py                                        # App settings via Pydantic BaseSettings
+│   │   ├── dependencies.py                                  # Shared FastAPI dependancies 
+│   │   ├── constants.py                                     # App-wide constants or enum
 │   │   │         
-│   │   ├── config/                                          # Configuration & environment
-│   │   │   ├── __init__.py   
-│   │   │   ├── setting.py                                   # Pydantic settings
-│   │   │   └── database.py                                  # SQLAlchemy engine/session config
-│   │   │
 │   │	├── models/                                          # SQLAlchemy ORM models       
-│   │	│   ├── __init__py        
+│   │	│   ├── __init__.py       
+│   │	│   ├── base_model.py      
 │   │	│   ├── core/           
-│   │   │   │   ├── base_model.py
+│   │   │   │   ├── __init__.py
 │   │   │   │   ├── user.py
 │   │   │   │   ├── guest.py
 │   │   │   │   └── staff.py
+│   │   │   ├── room/
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── room.py
+│   │   │   │   └── room_type.py
 │   │   │   ├── booking/
+│   │   │   │   ├── __init__.py
 │   │   │   │   ├── booking.py
 │   │   │   │   └── reservation.py
 │   │   │   ├── finance/
+│   │   │   │   ├── __init__.py
 │   │   │   │   ├── payment.py
 │   │   │   │   └── billing.py
-│   │   │   ├── room/
-│   │   │   │   ├── room.py
-│   │   │   │   └── roomtype.py
 │   │   │   ├── service/
+│   │   │   │   ├── __init__.py
 │   │   │   │   ├── service.py
 │   │   │   │   └── room_service.py
 │   │   │   └── feedback/
+│   │   │       ├── __init__.py
 │   │   │       └── feedback.py
 │   │   │  
-│   │   ├── schemas/                                           # Pydantic models(DTOS)
-│   │   │    ├── __init__.py       
-│   │   │    ├── user.py                 
-│   │   │    ├── guest.py     
-│   │   │    ├── staff.py    
-│   │   │    ├── room.py  
-│   │   │    ├── booking.py
-│   │   │    ├── reservation.py                 
-│   │   │    ├── payment.py       
-│   │   │    ├── billing.py
-│   │   │    ├── service.py                 
-│   │   │    └── feedback.py      
-│   │   ├── controllers/                                        # API logic (view layer)
-│   │   │    ├── __init__.py       
-│   │   │    ├── base.py                                         # Base controller logic
-│   │   │    ├── v1/        
-│   │   │    │   ├── auth/
-│   │   │    │   │   ├── login.py
-│   │   │    │   │   ├── logout.py
-│   │   │    │   │   └── register.py
-│   │   │    │   ├── user.py
-│   │   │    │   ├── guest.py
-│   │   │    │   ├── booking.py
-│   │   │    │   ├── room.py
-│   │   │    │   ├── reservation.py
-│   │   │    │   ├── payment.py
-│   │   │    │   └── feedback.py
-│   │   │    └── admin/
-│   │   │        ├── dashboard.py    
-│   │   │        ├── staff.py    
-│   │   │        ├── billing.py    
-│   │   │        └── room_service.py 
+│   │   ├── schemas/                                           # All Pydantic schemas 
+│   │   │   ├── __init__.py       
+│   │   │   ├── base_schema.py                 
+│   │   │   ├── core/  
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── user_schema.py
+│   │   │   │   ├── guest_schema.py
+│   │   │   │   └── staff_schema.py   
+│   │   │   ├── room/  
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── room_schema.py
+│   │   │   │   └── room_type_schema.py  
+│   │   │   ├── booking/
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── booking_schema.py
+│   │   │   │   └── reservation_schema.py
+│   │   │   ├── finance/
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── payment_schema.py
+│   │   │   │   └── billing_schema.py
+│   │   │   ├── service/ 
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── service_schema.py
+│   │   │   │   └── room_service_schema.py
+│   │   │   └── feedback/
+│   │   │       ├── __init__.py
+│   │   │       └── feedback_schema.py           
+│   │   │       
+│   │   ├── controllers/                                        # FastAPI routers (grouped by domain)
+│   │   │   ├── __init__.py   
+│   │   │   ├── core/  
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── user_controller.py
+│   │   │   │   ├── guest_controller.py
+│   │   │   │   └── staff_controller.py 
+│   │   │   ├── room/  
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── room_controller.py
+│   │   │   │   └── room_controller.py   
+│   │   │   ├── booking/
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── booking_controller.py
+│   │   │   │   └── reservation_constroller.py   
+│   │   │   ├── finance/
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── payment_controller.py
+│   │   │   │   └── billing_controller.py  
+│   │   │   ├── service/ 
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── service_controller.py
+│   │   │   │   └── room_service_controller.py
+│   │   │   └── feedback/
+│   │   │       ├── __init__.py
+│   │   │       └── feedback_controller.py           
 │   │   │
-│   │	├── services/                                         # Bussiness logic layer
-│   │   │	├── __init__.py       
-│   │   │ 	├── auth_service.py                 
-│   │   │	├── booking_service.py       
-│   │  	│	├── billing_service.py
-│   │   │	├── payment_service.py
-│   │   │	└── room_service_hander.py      
+│   │	├── services/                                         # Bussiness logic between controllers and DB
+│   │   │	├── __init__.py  
+│   │   │   ├── core/  
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── user_service.py
+│   │   │   │   ├── guest_service.py
+│   │   │   │   └── staff_service.py   
+│   │   │   ├── room/  
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── room_service.py
+│   │   │   │   └── room_service.py   
+│   │   │   ├── booking/
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── booking_service.py
+│   │   │   │   └── reservation_service.py  
+│   │   │   ├── finance/
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── payment_service.py
+│   │   │   │   └── billing_service.py  
+│   │   │   ├── service/ 
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── service_service.py
+│   │   │   │   └── room_service_service.py   
+│   │   │   └── feedback/
+│   │   │       ├── __init__.py
+│   │   │       └── feedback_service.py         
 │   │   │
-│   │	├── routes/                           
+│   │	├── db/                                           # DB config and migrations
 │   │   │	├── __init__.py       
-│   │   │	├── api.py                 
-│   │	│	└── web.py         
+│   │   │	├── session.py       
+│   │   │	├── base.py              
+│   │	│	└── migrations/      
 │   │	│ 
 │   │	├── middleware/  
 │   │   │	├── __init__.py                                         
 │   │   │	└── auth_required.py  
 │   │   │
-│   │	├── templates/                           
-│   │   │	├── email/                      
-│   │   │	└── admin/   
-│   │	├── static/                                    
+│   │	├── auth/                                        # JWT-based auth, roles, permissions
+│   │   │	├── __init__.py                             
+│   │   │	├── security.py                   
+│   │   │	└── dependencies.py
 │   │   │
-│   │   ├── uploads/                                    
-│   │   │	└── receipts/
-│   │   │
-│   │   ├── utils/                           
+│   │   ├── utils/                                       # Reusable helpers
 │   │   │	├── __init__.py       
-│   │   │	├── hash.py
-│   │   │	├── jwt.py         
-│   │   │	├── logger.py.py            
-│   │	│	└── common.py                                                
+│   │   │	├── helpers.py        
+│   │	│	└── validators.py                                                
 │   │   │
 │   │	└── tests/                                      # Pytest or unittest structure
 │   │   	├── __init__.py 
