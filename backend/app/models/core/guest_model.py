@@ -49,7 +49,7 @@ class GuestModel:
 			conn.close()
 			
 	@staticmethod
-	def get_guest_by_id(guest_id):
+	def get_guest_by_id(guest_id: int) -> Optional[Dict]:
 		"""
 			Retrieve a guest by ID. 
 		"""
@@ -92,7 +92,7 @@ class GuestModel:
             conn.close()
             
     @staticmethod 
-    def update_guest(guest_id, update_data: dict) -> bool:
+    def update_guest(guest_id: int, update_data: dict) -> bool:
         """Update guest details by ID."""
         if not update_data:
             print("[GuestModel] No update data provided.")
@@ -119,7 +119,7 @@ class GuestModel:
             conn.close()
             
     @staticmethod 
-    def delete_guest(guest_id):
+    def delete_guest(guest_id: int) ->bool:
         """
             Delete a guest by ID.
         """
