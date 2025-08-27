@@ -18,6 +18,7 @@ class RoomTypeModel:
         """
         conn = get_connection()
         if not conn:
+            print(f"[RoomTypeModel] Database connection failed.")
             return None
         
         try:
@@ -41,10 +42,13 @@ class RoomTypeModel:
                 
     @staticmethod
     def get_room_type_id(room_type_id: int) -> Optional[Dict[str, Any]]:
-        """Fetch a room type by ID. """
+        """
+            Fetch a room type by ID. 
+        """
         conn = get_connection()
         if not conn:
-            return None 
+            print("[RoomTypeModel] Database connection failed.")
+            return None
         
         try:
             cursor = conn.cursor(dictionary=True)
@@ -59,8 +63,12 @@ class RoomTypeModel:
     
     @staticmethod
     def get_all_room_type() -> List[Dict[str, Any]]:
+        """
+            Fetch all room types.
+        """
         conn = get_connection()
         if not conn:
+            print("[RoomTypeModel] Database connection failed.")
             return []
             
         try:
@@ -84,9 +92,12 @@ class RoomTypeModel:
             bed_count: Optional[int] = None 
             amenites: Optional[str] = None
         ) -> bool:
-            """Update a room type record. """
+            """
+                Update a room type record. 
+            """
             conn = get_connection()
             if not conn:
+                print("[RoomTypeModel] Database connection failed.")
                 return False 
                 
             try:
@@ -114,13 +125,21 @@ class RoomTypeModel:
                     values.append(amenites)
                     
             if not fields:
-                return False 
+                print("[RoomTypeModel] No fields to update.")
+                return False
+                
                 sql = f"UPDATE room_types SET {', '.join(fields)} WHERE room_type_id = %s"
                 values.append(room_type_id)
                 
                 cursor.execute(sql, tuple(values))
                 conn.commit()
-                return cursor.rowcount > 0
+                updated = cursor.rowcount >
+                if updated:
+                    print(f"[RoomTypeModel] Room type {room_type_id} updated.")
+                else:
+                    print(f"[RoomTypeModel] No update performed for room type {room_type_id}.")
+                        
+                return updated
             except Exception as e:
                 print(f" [Error] Updating room type: {e}")
                 return False
@@ -130,18 +149,26 @@ class RoomTypeModel:
                 
     @staticmethod
     def delete_room_type(room_type_id: int) ->bool:
-        """Delete a room type by ID."""
+        """
+            Delete a room type by ID.
+        """
         conn = get_connection()
         if not conn:
+            print("[RoomTypeModel] Database connection failed.")
             return False 
             
         try:
             cursor = conn.cursor()
             cursor.execute("DELETE FROM room_types WHERE room_type_id = %s", (room_type_id,))
             conn.commit()
-            return cursor.rowcount > 0
+            deleted = cursor.rowcount > 0
+            if deleted:
+                print(f"[RoomTypeModel] Room Type {room_type_id} deleted.")
+            else:
+                print(f"[RoomTypeModel] Room type {room_type_id} not found.")
+            return deleted            
         except Exception as e:
-            print(f"[Error] Deleting room type: {e}")
+            print(f"[RoomTypeModel] Error deleting room type: {e}")
             return False 
         finally:
             cursor.close()
