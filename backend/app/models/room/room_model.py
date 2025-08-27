@@ -103,7 +103,10 @@ class RoomModel:
             cursor.execute(sql, (new_status, room_id))
             conn.commit()
             updated = cursor.rowcount > 0
-            print(f"[RoomModel] Room {room_id} status updated to {new_status}." if updated else print(f"[RoomModel] No update performed.")
+            if updated:                
+                print(f"[RoomModel] Room {room_id} status updated to {new_status}.")
+            else
+                print(f"[RoomModel] No update performed for room {room_id}.")
             return updated
         except Exception as e:
             print(f"[RoomModel] Error updating room status: {e}")
@@ -127,7 +130,10 @@ class RoomModel:
             cursor.execute("DELETE FROM rooms WHERE room_id = %s", (room_id,))
             conn.commit()
             deleted = cursor.rowcount > 0
-            print(f"{RoomModel] Room {room_id} deleted.") if deleted else print(f"[RoomModel] Room not found.")
+            if deleted:                
+                print(f"{RoomModel] Room {room_id} deleted.")
+            else:
+                print(f"[RoomModel] Room not found.")
             return deleted
         except Exception as e:
             print(f"[RoomModel] Error deleting room: {e}")
