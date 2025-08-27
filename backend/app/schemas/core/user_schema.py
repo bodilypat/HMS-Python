@@ -57,3 +57,4 @@ class UserOut(BaseModel):
 # Internal schema for accessing hashed passwords
     class UserInDB(UserOut):
         password_hash: str 
+        
