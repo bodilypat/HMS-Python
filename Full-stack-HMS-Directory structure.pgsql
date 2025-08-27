@@ -13,28 +13,28 @@ Fullstack-Hotel-Management-System/
 │   │	│   ├── base_model.py      
 │   │	│   ├── core/           
 │   │   │   │   ├── __init__.py
-│   │   │   │   ├── user.py
-│   │   │   │   ├── guest.py
-│   │   │   │   └── staff.py
+│   │   │   │   ├── user_model.py
+│   │   │   │   ├── guest_model.py
+│   │   │   │   └── staff_model.py
 │   │   │   ├── room/
 │   │   │   │   ├── __init__.py
-│   │   │   │   ├── room.py
-│   │   │   │   └── room_type.py
+│   │   │   │   ├── room_model.py
+│   │   │   │   └── room_type_model.py
 │   │   │   ├── booking/
 │   │   │   │   ├── __init__.py
-│   │   │   │   ├── booking.py
-│   │   │   │   └── reservation.py
+│   │   │   │   ├── booking_model.py
+│   │   │   │   └── reservation_model.py
 │   │   │   ├── finance/
 │   │   │   │   ├── __init__.py
-│   │   │   │   ├── payment.py
-│   │   │   │   └── billing.py
+│   │   │   │   ├── payment_model.py
+│   │   │   │   └── billing_model.py
 │   │   │   ├── service/
 │   │   │   │   ├── __init__.py
-│   │   │   │   ├── service.py
-│   │   │   │   └── room_service.py
+│   │   │   │   ├── service_model.py
+│   │   │   │   └── room_service_model.py
 │   │   │   └── feedback/
 │   │   │       ├── __init__.py
-│   │   │       └── feedback.py
+│   │   │       └── feedback_model.py
 │   │   │  
 │   │   ├── schemas/                                           # All Pydantic schemas 
 │   │   │   ├── __init__.py       
