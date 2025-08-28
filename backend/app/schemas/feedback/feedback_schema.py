@@ -7,7 +7,7 @@ from pydantic import BaseModel, Field, conint
 class FeedbackBase(BaseModel):
     guest_id: int = Field(..., description="ID of the guest giving feedback")
     reservation_id: int = Field(..., description="ID of the reservatin")
-    rating: conint(get=1, le=50 = Field(..., description="Rating must be between 1 and 5")
+    rating: conint(ge=1, le=50) = Field(..., description="Rating must be between 1 and 5")
     comments: Optional[str] = Field(None, description="Optional comments")
     feedback_date: Optional[datetime] = Field(None, description="Optional feedback date (defaults to now)")
     
@@ -40,4 +40,5 @@ class FeedbackOut(BaseModel):
     
 class Config:
     orm_mode = True 
+    
     
