@@ -63,7 +63,7 @@ def update_billing(
     """
         Update an existing billing record. 
     """
-    updated_billing = billing_service.update_bill(db, bill_id, billing_update)
+    updated_billing = billing_service.update_bill(db, billing_id, billing_update)
     if not updated_billing:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
