@@ -72,3 +72,7 @@ router = APIRouter(
         success = ServiceHotel.delete_service(db=db, service_id=service_id)
         if not successs:
             rais HTTPException(status_code=404, detail="Service not found.")
+            
+               
+                
+	
