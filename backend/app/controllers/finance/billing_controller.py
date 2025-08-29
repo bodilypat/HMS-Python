@@ -46,13 +46,13 @@ def get_billing_by_id(
     return billing
     
 @router.get("/", response_model=List[BillingOut])
-def list_billings(
+def get_all_billings(
         db: Session = Depends(get_db)
     ):
     """
         List all billing records.
     """
-    return billing_service.list_billings(db)
+    return billing_service.get_all_billings(db)
     
 @router.put("/{billing_id}", response_model=BillingOut)
 def update_billing(
