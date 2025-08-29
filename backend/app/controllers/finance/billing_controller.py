@@ -30,14 +30,14 @@ def create_bill(
 	return create_bill
 	
 @router.get("/{billing_id}", response_model=BillingOut)
-def get_bill_by_id(
+def get_billing_by_id(
         billing_id: int,
         db: Session = Depends(get_db)
     )
     """
         Retrieve a billing record by its ID.
     """
-    billing = billing_service.get_bill_by_id(db, billing_id)
+    billing = billing_service.get_billing_by_id(db, billing_id)
     if not bill:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
