@@ -78,3 +78,7 @@ def delete_booking(booking_id: int, db: Session = Depends(get_db)):
 			detail=f"Booking with ID {booking_id} not found or could not be deleted."
 		)
 		return 
+
+	
+	
+	
