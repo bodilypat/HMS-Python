@@ -5,8 +5,8 @@ from sqlalchemy.orm import Session
 from typing import List 
 
 from backend.app.deps import get_db
-from backend.app.schemas.services.service_schema import ServiceCreate, ServiceUpdate, ServiceOut 
-from backend.app.services.service.service_hotel import ServiceHotel
+from backend.app.schemas.service.service_schema import ServiceCreate, ServiceUpdate, ServiceOut 
+from backend.app.services.service.hotel_service import HotelService
 
 router = APIRouter(
 		prefix="/services",
@@ -22,7 +22,7 @@ router = APIRouter(
 		"""
 			Retrieve a list of services.
 		"""
-		return ServiceHotel.get_services(db=db, skip=skip, limit=limit)
+		return HotelService.get_services(db=db, skip=skip, limit=limit)
         
     @router.post("/", response_model=ServiceOut, status_code=status.HTTP_201_CREATED)
     def create_service(
@@ -32,7 +32,7 @@ router = APIRouter(
         """
             Create a new service.
         """
-        service = ServiceHotel.create_service(db=db, service_in=service_in)
+        service = HotelService.create_service(db=db, service_in=service_in)
         if not service:
             raise HTTPException(status_code=400, detail="Failed to create service.")
         return service
@@ -42,7 +42,7 @@ router = APIRouter(
             service_id: int, 
             db: Session = Depends(get_db)
         ):
-        service = ServiceHotel.get_service_by_id(db=db, service_id=service_id)
+        service = HotelService.get_service_by_id(db=db, service_id=service_id)
         if not service:
             raise HTTPException(status_code=404, detail="Service not found.")
         return service 
@@ -56,7 +56,7 @@ router = APIRouter(
         """
             Update an existing service.
         """
-        service = ServiceHotel.update_service(db=db, service_id=service_id, service_in=service_in)
+        service = HotelService.update_service(db=db, service_id=service_id, service_in=service_in)
         if not service:
             raise HTTPException(status_code=404, detail="Failed to update service."
         return service 
@@ -69,7 +69,7 @@ router = APIRouter(
         """
             Delete a service by ID.
         """
-        success = ServiceHotel.delete_service(db=db, service_id=service_id)
+        success = HotelService.delete_service(db=db, service_id=service_id)
         if not successs:
             rais HTTPException(status_code=404, detail="Service not found.")
             
@@ -77,3 +77,4 @@ router = APIRouter(
                 
 
 	
+
