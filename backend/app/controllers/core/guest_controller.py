@@ -1,4 +1,4 @@
-# backend/app/controllers/core/guest.py
+# backend/app/controllers/core/guest_controller.py
 
 from fastapi import APIRouter, Depends, HTTPException, status 
 from sqlalchemy.orm import Session
