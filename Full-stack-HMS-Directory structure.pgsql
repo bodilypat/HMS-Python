@@ -5,7 +5,7 @@ Fullstack-Hotel-Management-System/
 │   │   ├── __init__.py  
 │   │   ├── main.py     									 # FastAPI app entry point
 │   │   ├── config.py                                        # App settings via Pydantic BaseSettings
-│   │   ├── dependencies.py                                  # Shared FastAPI dependancies 
+│   │   ├── deps.py                                          # Shared FastAPI dependancies 
 │   │   ├── constants.py                                     # App-wide constants or enum
 │   │   │         
 │   │	├── models/                                          # SQLAlchemy ORM models       
@@ -30,7 +30,7 @@ Fullstack-Hotel-Management-System/
 │   │   │   │   └── billing_model.py
 │   │   │   ├── service/
 │   │   │   │   ├── __init__.py
-│   │   │   │   ├── service_model.py
+│   │   │   │   ├── hotel_service_model.py
 │   │   │   │   └── room_service_model.py
 │   │   │   └── feedback/
 │   │   │       ├── __init__.py
@@ -56,9 +56,9 @@ Fullstack-Hotel-Management-System/
 │   │   │   │   ├── __init__.py
 │   │   │   │   ├── payment_schema.py
 │   │   │   │   └── billing_schema.py
-│   │   │   ├── service/ 
+│   │   │   ├── services/ 
 │   │   │   │   ├── __init__.py
-│   │   │   │   ├── service_schema.py
+│   │   │   │   ├── hotel_service_schema.py
 │   │   │   │   └── room_service_schema.py
 │   │   │   └── feedback/
 │   │   │       ├── __init__.py
@@ -73,19 +73,18 @@ Fullstack-Hotel-Management-System/
 │   │   │   │   └── staff_controller.py 
 │   │   │   ├── room/  
 │   │   │   │   ├── __init__.py
-│   │   │   │   ├── room_controller.py
 │   │   │   │   └── room_controller.py   
 │   │   │   ├── booking/
 │   │   │   │   ├── __init__.py
 │   │   │   │   ├── booking_controller.py
-│   │   │   │   └── reservation_constroller.py   
+│   │   │   │   └── reservation_controller.py   
 │   │   │   ├── finance/
 │   │   │   │   ├── __init__.py
 │   │   │   │   ├── payment_controller.py
 │   │   │   │   └── billing_controller.py  
 │   │   │   ├── service/ 
 │   │   │   │   ├── __init__.py
-│   │   │   │   ├── service_controller.py
+│   │   │   │   ├── hotel_service_controller.py
 │   │   │   │   └── room_service_controller.py
 │   │   │   └── feedback/
 │   │   │       ├── __init__.py
@@ -112,8 +111,8 @@ Fullstack-Hotel-Management-System/
 │   │   │   │   └── billing_service.py  
 │   │   │   ├── service/ 
 │   │   │   │   ├── __init__.py
-│   │   │   │   ├── service_service.py
-│   │   │   │   └── room_service_service.py   
+│   │   │   │   ├── hotel_service.py
+│   │   │   │   └── room_service.py   
 │   │   │   └── feedback/
 │   │   │       ├── __init__.py
 │   │   │       └── feedback_service.py         
