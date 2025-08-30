@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from typing import List 
 
-from backend.app.deps imort get_db
+from backend.app.deps import get_db
 from backend.app.schemas.services.service_schema import ServiceCreate, ServiceUpdate, ServiceOut 
 from backend.app.services.service.service_hotel import ServiceHotel
 
@@ -75,4 +75,5 @@ router = APIRouter(
             
                
                 
+
 	
