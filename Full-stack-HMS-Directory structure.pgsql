@@ -2,7 +2,6 @@ Fullstack-Hotel-Management-System/
 ├── backend/                              
 │   │     
 │   ├── app/                           
-│   │   ├── __init__.py  
 │   │   ├── main.py     									 # FastAPI app entry point
 │   │   ├── config.py                                        # App settings via Pydantic BaseSettings
 │   │   ├── constants.py                                     # App-wide constants or enum
@@ -17,126 +16,110 @@ Fullstack-Hotel-Management-System/
 │   │	│   ├── __init__.py       
 │   │	│   ├── base_model.py      
 │   │	│   ├── core/           
-│   │   │   │   ├── __init__.py
-│   │   │   │   ├── user_entity.py
-│   │   │   │   ├── guest_entity.py
-│   │   │   │   └── staff_entity.py
+│   │   │   │   ├── user.py
+│   │   │   │   ├── guest.py
+│   │   │   │   └── staff.py
 │   │   │   ├── room/
-│   │   │   │   ├── __init__.py
-│   │   │   │   ├── room_entity.py
-│   │   │   │   ├── room_category_entity.py
-│   │   │   │   ├── room_amenity_entity.py
-│   │   │   │   ├── room_pricing_entity.py
-│   │   │   │   └── room_availability_entity.py
+│   │   │   │   ├── room.py
+│   │   │   │   ├── category.py
+│   │   │   │   ├── amenity.py
+│   │   │   │   ├── pricing.py
+│   │   │   │   └── availability.py
 │   │   │   ├── booking/
-│   │   │   │   ├── __init__.py
-│   │   │   │   ├── booking_entity.py
-│   │   │   │   ├── reservation_entity.py
-│   │   │   │   ├── room_availability_entity.py
-│   │   │   │   ├── booking_history_entity.py
-│   │   │   │   └── payment_status_entity.py
+│   │   │   │   ├── booking.py
+│   │   │   │   ├── reservation.py
+│   │   │   │   └── history.py
 │   │   │   ├── finance/
-│   │   │   │   ├── __init__.py
-│   │   │   │   ├── payment_entity.py
-│   │   │   │   ├── billing_entity.py
-│   │   │   │   ├── invoice_entity.py
-│   │   │   │   ├── transaction_entity.py
-│   │   │   │   └── discount_entiry.py
+│   │   │   │   ├── payment.py
+│   │   │   │   ├── billing.py
+│   │   │   │   ├── invoice.py
+│   │   │   │   ├── transaction.py
+│   │   │   │   └── discount.py
 │   │   │   ├── service/
-│   │   │   │   ├── __init__.py
-│   │   │   │   ├── hotel_service_entity.py
-│   │   │   │   └── room_service_entity.py
+│   │   │   │   ├── hotel.py
+│   │   │   │   └── room.py
 │   │   │   └── feedback/
 │   │   │       ├── __init__.py
-│   │   │       └── feedback_model.py
+│   │   │       └── feedback.py
 │   │   │  
 │   │   ├── schemas/                                           # All Pydantic schemas 
 │   │   │   ├── __init__.py       
 │   │   │   ├── base_schema.py                 
 │   │   │   ├── core/  
-│   │   │   │   ├── __init__.py
-│   │   │   │   ├── user_schema.py
-│   │   │   │   ├── guest_schema.py
-│   │   │   │   └── staff_schema.py   
+│   │   │   │   ├── user.py
+│   │   │   │   ├── guest.py
+│   │   │   │   └── staff.py   
 │   │   │   ├── room/  
-│   │   │   │   ├── __init__.py
-│   │   │   │   ├── room_schema.py
-│   │   │   │   └── room_type_schema.py  
+│   │   │   │   ├── room.py
+│   │   │   │   ├── category.py
+│   │   │   │   ├── amenity.py
+│   │   │   │   ├── availability.py
+│   │   │   │   └── princing.py  
 │   │   │   ├── booking/
-│   │   │   │   ├── __init__.py
-│   │   │   │   ├── booking_schema.py
-│   │   │   │   └── reservation_schema.py
+│   │   │   │   ├── booking.py
+│   │   │   │   ├── reservation.py
+│   │   │   │   └── history.py
 │   │   │   ├── finance/
-│   │   │   │   ├── __init__.py
-│   │   │   │   ├── payment_schema.py
-│   │   │   │   └── billing_schema.py
+│   │   │   │   ├── payment.py
+│   │   │   │   ├── billing.py
+│   │   │   │   ├── transaction.py
+│   │   │   │   ├── invoice.py
+│   │   │   │   └── discount.py
 │   │   │   ├── services/ 
-│   │   │   │   ├── __init__.py
-│   │   │   │   ├── hotel_service_schema.py
-│   │   │   │   └── room_service_schema.py
+│   │   │   │   ├── hotel.py
+│   │   │   │   └── room.py
 │   │   │   └── feedback/
-│   │   │       ├── __init__.py
-│   │   │       └── feedback_schema.py           
+│   │   │       └── feedback.py           
 │   │   │
 │   │	├── services/                                         # Bussiness logic between controllers and DB
 │   │   │	├── __init__.py  
 │   │   │   ├── core/  
-│   │   │   │   ├── __init__.py
-│   │   │   │   ├── user_service.py
-│   │   │   │   ├── guest_service.py
-│   │   │   │   └── staff_service.py   
+│   │   │   │   ├── user.py
+│   │   │   │   ├── guest.py
+│   │   │   │   └── staff.py   
 │   │   │   ├── room/  
-│   │   │   │   ├── __init__.py
-│   │   │   │   ├── room_management_service.py
-│   │   │   │   ├── room_category_service.py
-│   │   │   │   ├── room_availability_service.py
-│   │   │   │   ├── room_pricing_service.py
-│   │   │   │   └── room_inventory_service.py   
+│   │   │   │   ├── management.py
+│   │   │   │   ├── category.py
+│   │   │   │   ├── availability.py
+│   │   │   │   ├── pricing.py
+│   │   │   │   └── inventory.py   
 │   │   │   ├── booking/
-│   │   │   │   ├── __init__.py
-│   │   │   │   ├── booking_service.py
-│   │   │   │   ├── reservation_service.py
-│   │   │   │   ├── room_avaialbility_service.py
-│   │   │   │   └── booking_history_service.py  
+│   │   │   │   ├── booking.py
+│   │   │   │   ├── reservation.py
+│   │   │   │   ├── availbility.py
+│   │   │   │   └── history.py  
 │   │   │   ├── finance/
-│   │   │   │   ├── __init__.py
-│   │   │   │   ├── payment_service.py
-│   │   │   │   ├── billing_service.py
-│   │   │   │   ├── invoice_service.py
-│   │   │   │   ├── transaction_service.py
-│   │   │   │   └── discount_service.py
+│   │   │   │   ├── payment.py
+│   │   │   │   ├── billing.py
+│   │   │   │   ├── invoice.py
+│   │   │   │   ├── transaction.py
+│   │   │   │   └── discount.py
 │   │   │   ├── service/ 
-│   │   │   │   ├── __init__.py
-│   │   │   │   ├── hotel_service_logic.py
-│   │   │   │   └── room_service_logic.py   
+│   │   │   │   ├── hotel.py
+│   │   │   │   └── room_service.py   
 │   │   │   └── feedback/
-│   │   │       ├── __init__.py
-│   │   │       └── feedback_service.py   
+│   │   │       └── feedback.py   
 │   │   ├── controllers/                                        # FastAPI routers (grouped by domain)
 │   │   │   ├── __init__.py   
 │   │   │   ├── core/  
-│   │   │   │   ├── __init__.py
-│   │   │   │   ├── user_controller.py
-│   │   │   │   ├── guest_controller.py
-│   │   │   │   └── staff_controller.py 
+│   │   │   │   ├── user.py
+│   │   │   │   ├── guest.py
+│   │   │   │   └── staff.py 
 │   │   │   ├── room/  
-│   │   │   │   ├── __init__.py
-│   │   │   │   └── room_controller.py   
+│   │   │   │   ├── room.py
+│   │   │   │   ├── category.py
+│   │   │   │   └── availability.py   
 │   │   │   ├── booking/
-│   │   │   │   ├── __init__.py
-│   │   │   │   ├── booking_controller.py
-│   │   │   │   └── reservation_controller.py   
+│   │   │   │   ├── booking.py
+│   │   │   │   └── reservation.py  
 │   │   │   ├── finance/
-│   │   │   │   ├── __init__.py
-│   │   │   │   ├── payment_controller.py
-│   │   │   │   └── billing_controller.py  
+│   │   │   │   ├── billing.py
+│   │   │   │   └── payment.py  
 │   │   │   ├── service/ 
-│   │   │   │   ├── __init__.py
-│   │   │   │   ├── hotel_service_controller.py
-│   │   │   │   └── room_service_controller.py
+│   │   │   │   ├── hotel.py
+│   │   │   │   └── room_service.py
 │   │   │   └── feedback/
-│   │   │       ├── __init__.py
-│   │   │       └── feedback_controller.py     
+│   │   │       └── feedback.py     
 │   │   ├── utils/                                       # Reusable helpers
 │   │   │	├── __init__.py       
 │   │   │	├── helpers.py        
@@ -146,10 +129,7 @@ Fullstack-Hotel-Management-System/
 │   │   │	├── __init__.py       
 │   │   │	├── session.py       
 │   │   │	├── base.py              
-│   │	│	└── migrations/      
-│   │	│ 
-│   │   │
-│   │   │                                           
+│   │	│	└── migrations/                                               
 │   │   │
 │   │	└── tests/                                      # Pytest or unittest structure
 │   │   	├── __init__.py 
