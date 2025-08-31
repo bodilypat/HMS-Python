@@ -156,57 +156,84 @@ Fullstack-Hotel-Management-System/
 │   │   └── assets/
 │   │   	├── images/  
 │   │   	└── icons/
-│   ├── src/                                    # Main source code
-│   │   ├── index.js                            # Entry point
-│   │   ├── App.js                              # Root component
-│   │	├── routes/                             # React Router configuration
-│   │	│   ├── index.js                        # Central route definitions
-│   │	│   ├── ProtecteRoute.js                # Auth guard wrapper
-│   │   │   └── RoleBaseRoute.js                # (Optional) RBAC support
+│   ├── src/                                    
+│   │   ├── index.js                            # React entry point
+│   │   ├── App.js                              # Root App wrapper
+│   │	├── routes/                             # Routing logic
+│   │	│   ├── index.js                        # AppRoutes defininition
+│   │	│   ├── ProtecteRoute.js                
+│   │   │   └── RoleBaseRoute.js                
 │   │   │ 
-│   ├── pages/                                  # Page-level components (screen views)
+│   ├── pages/                                  # Page-level views grouped by domain
 │   │   ├── Home.js 
 │   │   ├── Login.js 
 │   │   ├── Register.js 
 │   │   ├── Dashboard/
 │   │	│   ├── index.js  
 │   │   │   └── StatsWidget.js   
-│   │   ├── Booking.js    
-│   │   ├── Rooms.js    
-│   │   ├── Feedback.js    
-│   │   └── Profile.js                  
+│   │   ├── Booking/    
+│   │	│   ├── BookingList.js  
+│   │	│   ├── BookingForm.js
+│   │   │   └── BookingDetails.js   
+│   │   ├── room/
+│   │	│   ├── RoomList.js  
+│   │	│   ├── RoomDetails.js
+│   │   │   └── RoomManagement.js
+│   │   ├── profile/
+│   │	│   ├── Profile.js  
+│   │   │   └── EditProfile.js    
+│   │   ├── finance/
+│   │	│   ├── Billing.js  
+│   │   │   └── Payments.js
+│   │   ├── feedback/
+│   │   │   └── FeedbackForm.js    
+│   │   └── services/          
+│   │       └── RoomServices.js        
 │   ├── components/
 │   │   ├── common/
 │   │   │   ├── Navbar.js
 │   │   │   ├── Footer.js
 │   │   │   └── Sidebar.js 
 │   │   ├── booking/
-│   │   │   └── bookingForm.js
-│   │   └── rooms/     
-│   │   	└── RoomCard.js               
-│   ├── services/                               # API service layer (Axios, Fetch)
-│   │   ├── api.js                                         
+│   │   │   └── bookingCard.js
+│   │   ├── room/
+│   │   │   └── RoomCard.js
+│   │   └── feedback/     
+│   │   	└── RetingStars.js               
+│   ├── services/                               # API call abstraction
+│   │   ├── api.js                              # Axios base instance           
 │   │   ├── authService.js
 │   │   ├── bookingService.js
-│   │   └── roomService.js                     
+│   │   ├── roomService.js
+│   │   ├── financeService.js
+│   │   ├── feedbackService.js
+│   │   └── serviceRequestService.js                     
 │   ├── context/                                # Global state 
-│   │   └── AuthContent.js 
-│   ├── hooks/                                  # Custom React hooks
-│   │   └── userAuth.js 
-│   ├── styles/                                 # Global and module-based styles
+│   │   ├── authContext.js
+│   │   └── BookingContext.js 
+│   ├── hooks/                                  # Custom Reusable hooks
+│   │   ├── useAuth.js
+│   │   ├── useForm.js
+│   │   └── userBooking.js 
+│   ├── styles/                                 # Global and scoped CSS
 │   │   ├── main.css
+│   │   ├── dashboard.js
 │   │   └── dashboard.css 
 │   ├── utils/                                  # Utility functions and constants
-│   │   ├── validators.js
-│   │   └── contants.js
+│   │   ├── constants.js
+│   │   └── validators.js
 │   │
 │   ├── uploads/    
-│   └── __tests__/                                # Client-side uploads (optionsal)
-│       ├── App.test.js                 
-│    	└── components/
-│           └── Navbar.test.js
+│   └── __tests__/                              # Client-side uploads (optionsal)
+│       ├── App.test.js 
+│       ├── components/  
+│       │   ├── Navbar.test.js  
+│		│   └── RoomCard.test.js		
+│    	└── pages/
+│   	    ├── Login.test.js  
+│   	    ├── BookingList.js
+│           └── FeedbackForm.js
 ├── .env                                        # Environment variables
 ├── .gitignore
 ├── package.json
-│
 └── README.md
