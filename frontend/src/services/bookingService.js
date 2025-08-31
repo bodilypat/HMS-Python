@@ -9,3 +9,4 @@ const bookingService = {
 	deleteBooking: (id) => api.delete('/bookings/${id}'),
 };
 export default bookingService;
+
