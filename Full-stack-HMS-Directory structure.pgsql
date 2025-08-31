@@ -162,78 +162,77 @@ Fullstack-Hotel-Management-System/
 │   │	├── routes/                             # Routing logic
 │   │	│   ├── index.js                        # AppRoutes defininition
 │   │	│   ├── ProtecteRoute.js                
-│   │   │   └── RoleBaseRoute.js                
-│   │   │ 
-│   ├── pages/                                  # Page-level views grouped by domain
-│   │   ├── Home.js 
-│   │   ├── Login.js 
-│   │   ├── Register.js 
-│   │   ├── Dashboard/
-│   │	│   ├── index.js  
-│   │   │   └── StatsWidget.js   
-│   │   ├── Booking/    
-│   │	│   ├── BookingList.js  
-│   │	│   ├── BookingForm.js
-│   │   │   └── BookingDetails.js   
-│   │   ├── room/
-│   │	│   ├── RoomList.js  
-│   │	│   ├── RoomDetails.js
-│   │   │   └── RoomManagement.js
-│   │   ├── profile/
-│   │	│   ├── Profile.js  
-│   │   │   └── EditProfile.js    
-│   │   ├── finance/
-│   │	│   ├── Billing.js  
-│   │   │   └── Payments.js
-│   │   ├── feedback/
-│   │   │   └── FeedbackForm.js    
-│   │   └── services/          
-│   │       └── RoomServices.js        
-│   ├── components/
-│   │   ├── common/
-│   │   │   ├── Navbar.js
-│   │   │   ├── Footer.js
-│   │   │   └── Sidebar.js 
-│   │   ├── booking/
-│   │   │   └── bookingCard.js
-│   │   ├── room/
-│   │   │   └── RoomCard.js
-│   │   └── feedback/     
-│   │   	└── RetingStars.js               
-│   ├── services/                               # API call abstraction
-│   │   ├── api.js                              # Axios base instance           
-│   │   ├── authService.js
-│   │   ├── bookingService.js
-│   │   ├── roomService.js
-│   │   ├── financeService.js
-│   │   ├── feedbackService.js
-│   │   └── serviceRequestService.js                     
-│   ├── context/                                # Global state 
-│   │   ├── authContext.js
-│   │   └── BookingContext.js 
-│   ├── hooks/                                  # Custom Reusable hooks
-│   │   ├── useAuth.js
-│   │   ├── useForm.js
-│   │   └── userBooking.js 
-│   ├── styles/                                 # Global and scoped CSS
-│   │   ├── main.css
-│   │   ├── dashboard.js
-│   │   └── dashboard.css 
-│   ├── utils/                                  # Utility functions and constants
-│   │   ├── constants.js
-│   │   └── validators.js
-│   │
+│   │   │   └── RoleBaseRoute.js                 
+│   │	├── pages/                                  # Page-level views grouped by domain
+│   │   │ 	├── auth/ 
+│   │   │ 	│	├── login.js 
+│   │   │ 	│	└── register.js 
+│   │   │ 	├── Dashboard/
+│   │	│   │	├── index.js  
+│   │   │   │	└── StatsWidget.js   
+│   │   │ 	├── Booking/    
+│   │	│   │	├── BookingList.js  
+│   │	│   │	├── BookingForm.js
+│   │   │   │	└── BookingDetails.js   
+│   │   │ 	├── room/
+│   │	│  	│	├── RoomList.js  
+│   │	│  	│	├── RoomDetails.js
+│   │   │   │	└── RoomManagement.js
+│   │   │ 	├── profile/
+│   │	│   │	├── Profile.js  
+│   │   │   │	└── EditProfile.js    
+│   │   │ 	├── finance/
+│   │	│   │	├── Billing.js  
+│   │   │   │	└── Payments.js
+│   │   │ 	├── feedback/
+│   │   │   │	└── FeedbackForm.js    
+│   │   │ 	└── services/          
+│   │   │     	└── RoomServices.js        
+│   │	├── components/
+│   │   │	├── common/
+│   │   │   │	├── Navbar.js
+│   │   │   │	├── Footer.js
+│   │   │   │	└── Sidebar.js 
+│   │   │	├── booking/
+│   │   │   │	└── bookingCard.js
+│   │   │	├── room/
+│   │   │   │	└── RoomCard.js
+│   │   │	└── feedback/     
+│   │   │		└── RetingStars.js               
+│   │	├── services/                               # API call abstraction
+│   │   │	├── api.js                              # Axios base instance           
+│   │   │	├── authService.js
+│   │   │	├── bookingService.js
+│   │   │	├── roomService.js
+│   │   │	├── financeService.js
+│   │   │	├── feedbackService.js
+│   │   │	└── serviceRequestService.js                     
+│  	│	├── context/                                # Global state 
+│   │   │	├── authContext.js
+│   │   │	└── BookingContext.js 
+│   │	├── hooks/                                  # Custom Reusable hooks
+│   │   │	├── useAuth.js
+│   │   │	├── useForm.js
+│   │   │	└── userBooking.js 
+│   │	├── styles/                                 # Global and scoped CSS
+│   │   │	├── main.css
+│   │   │	├── dashboard.js
+│   │   │	└── dashboard.css 
+│   │	├── utils/                                  # Utility functions and constants
+│   │   │	├── constants.js
+│   │   │	└── validators.js
+│   │   │
 │   ├── uploads/    
-│   └── __tests__/                              # Client-side uploads (optionsal)
+│   └── __tests__/                                  # Client-side uploads (optionsal)
 │       ├── App.test.js 
 │       ├── components/  
 │       │   ├── Navbar.test.js  
 │		│   └── RoomCard.test.js		
 │    	└── pages/
 │   	    ├── Login.test.js  
-│   	    ├── BookingList.js
-│           └── FeedbackForm.js
-├── .env                                        # Environment variables
+│   	    ├── BookingList.test.js
+│           └── FeedbackForm.test.js
+├── .env                                             # Environment variables
 ├── .gitignore
 ├── package.json
 └── README.md
