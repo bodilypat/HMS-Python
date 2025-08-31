@@ -216,8 +216,8 @@ Fullstack-Hotel-Management-System/
 │   │   │	└── userBooking.js 
 │   │	├── styles/                                 # Global and scoped CSS
 │   │   │	├── main.css
-│   │   │	├── dashboard.js
-│   │   │	└── dashboard.css 
+│   │   │	├── dashboard.css
+│   │   │	└── room.css
 │   │	├── utils/                                  # Utility functions and constants
 │   │   │	├── constants.js
 │   │   │	└── validators.js
