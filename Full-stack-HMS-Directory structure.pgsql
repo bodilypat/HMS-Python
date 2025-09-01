@@ -163,7 +163,7 @@ Fullstack-Hotel-Management-System/
 │   │	│   ├── appRoutes.js                              # AppRoutes defininition
 │   │	│   ├── protecteRoute.js                
 │   │   │   └── roleBaseRoute.js                 
-│   │	├── pages(features)/                              # Page-level views grouped by domain
+│   │	├── features       /                              # Page-level views grouped by domain
 │   │   │ 	├── auth/ 
 │   │   │ 	│	├── pages/
 │   │   │ 	│	│   ├── login.js
@@ -220,7 +220,7 @@ Fullstack-Hotel-Management-System/
 │   │   │ 	│	│   └── StatsWidget.js
 │   │   │ 	│	└── styles/
 │	│	│	│		└── dashboard.css        
-│   │   │     	     
+│   │   │   │  	     
 │   │	├── shared/                                      # Global/Shared modules
 │   │   │	├── components/
 │   │   │   │	├── navbar.js
@@ -228,7 +228,7 @@ Fullstack-Hotel-Management-System/
 │   │   │   │	└── sidebar.js 
 │   │   │	├── hooks/
 │   │   │   │	├── useForm.js
-│   │   │   │	└── useDebounce.js
+│   │   │   │	└── useDebounce.js (optional)
 │   │   │	├── styles/
 │   │   │   │	└── main.css
 │   │   │	└── utils/     
@@ -238,17 +238,6 @@ Fullstack-Hotel-Management-System/
 │   │   │	└── api.js                     
 │  	│	├── context/                                     # Global state 
 │   │   │	└── globalAppContext.js 
-│   │	├── hooks/                                       # Custom Reusable hooks
-│   │   │	├── useAuth.js
-│   │   │	├── useForm.js
-│   │   │	└── userBooking.js 
-│   │	├── styles/                                      # Global and scoped CSS
-│   │   │	├── main.css
-│   │   │	├── dashboard.css
-│   │   │	└── room.css
-│   │	├── utils/                                       # Utility functions and constants
-│   │   │	├── constants.js
-│   │   │	└── validators.js
 │   │   │
 │   └── tests/                                           # Client-side uploads (optionsal)
 │       ├── features/  
