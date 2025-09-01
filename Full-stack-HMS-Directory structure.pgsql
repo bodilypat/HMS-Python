@@ -120,18 +120,18 @@ Fullstack-Hotel-Management-System/
 │   │   │   │   └── room_service.py
 │   │   │   └── feedback/
 │   │   │       └── feedback.py     
-│   │   ├── utils/                                       # Reusable helpers
+│   │   ├── utils/                                       	 # Reusable helpers
 │   │   │	├── __init__.py       
 │   │   │	├── helpers.py        
 │   │	│	└── validators.py                 
 │   │   │
-│   │	├── db/                                           # DB config and migrations
+│   │	├── db/                                              # DB config and migrations
 │   │   │	├── __init__.py       
 │   │   │	├── session.py       
 │   │   │	├── base.py              
 │   │	│	└── migrations/                                               
 │   │   │
-│   │	└── tests/                                      # Pytest or unittest structure
+│   │	└── tests/                                           # Pytest or unittest structure
 │   │   	├── __init__.py 
 │   │   	├── conftest.py 
 │   │   	├── auth/
@@ -145,9 +145,9 @@ Fullstack-Hotel-Management-System/
 │   │   	└── room/    
 │   │           └── test_room.py                
 │   │
-│   ├── run.py                                  # Entrypoint script 
+│   ├── run.py                                             # Entrypoint script 
 │   ├── .env
-│   └── requirements.txt                        # Dependancies 
+│   └── requirements.txt                                   # Dependancies 
 │   
 ├── frontend/                             
 │   ├── public/   
@@ -157,82 +157,111 @@ Fullstack-Hotel-Management-System/
 │   │   	├── images/  
 │   │   	└── icons/
 │   ├── src/                                    
-│   │   ├── index.js                            # React entry point
-│   │   ├── App.js                              # Root App wrapper
-│   │	├── routes/                             # Routing logic
-│   │	│   ├── index.js                        # AppRoutes defininition
-│   │	│   ├── ProtecteRoute.js                
-│   │   │   └── RoleBaseRoute.js                 
-│   │	├── pages/                                  # Page-level views grouped by domain
+│   │   ├── index.js                                      # React entry point
+│   │   ├── app.js                                        # Root App wrapper
+│   │	├── routes/                                       # Routing logic
+│   │	│   ├── appRoutes.js                              # AppRoutes defininition
+│   │	│   ├── protecteRoute.js                
+│   │   │   └── roleBaseRoute.js                 
+│   │	├── pages(features)/                              # Page-level views grouped by domain
 │   │   │ 	├── auth/ 
-│   │   │ 	│	├── login.js 
-│   │   │ 	│	└── register.js 
-│   │   │ 	├── Dashboard/
-│   │	│   │	├── index.js  
-│   │   │   │	└── StatsWidget.js   
-│   │   │ 	├── Booking/    
-│   │	│   │	├── BookingList.js  
-│   │	│   │	├── BookingForm.js
-│   │   │   │	└── BookingDetails.js   
+│   │   │ 	│	├── pages/
+│   │   │ 	│	│   ├── login.js
+│   │   │ 	│	│   └── register.js
+│   │   │ 	│	├── services/
+│   │   │   │ 	│	└── authService.js
+│   │   │ 	│	├── context/
+│   │   │   │ 	│	└── authContext.js
+│   │   │ 	│	└── hooks/
+│	│	│	│		└── useAuth.js
+│   │   │ 	├── Booking/  
+│   │   │ 	│	├── pages/
+│   │   │ 	│	│   ├── BookingList.js
+│   │   │ 	│	│   ├── BookingForm.js
+│   │   │ 	│	│   └── Bookingdetials.js
+│   │   │ 	│	├── components/
+│   │   │   │ 	│	└── bookingCard.js
+│   │   │ 	│	├── services/
+│   │   │   │ 	│	└── bookingService.js
+│   │   │ 	│	└── hooks/
+│	│	│	│		└── useBooking.js
 │   │   │ 	├── room/
-│   │	│  	│	├── RoomList.js  
-│   │	│  	│	├── RoomDetails.js
-│   │   │   │	└── RoomManagement.js
-│   │   │ 	├── profile/
-│   │	│   │	├── Profile.js  
-│   │   │   │	└── EditProfile.js    
+│   │   │ 	│	├── pages/
+│   │   │ 	│	│   ├── roomList.js
+│   │   │ 	│	│   ├── roomDetails.js
+│   │   │ 	│	│   └── roomManagement.js
+│   │   │ 	│	├── components/
+│   │   │   │ 	│	└── roomCard.js
+│   │   │ 	│	├── services/
+│   │   │   │ 	│	└── roomService.js
+│   │   │ 	│	└── styles/
+│	│	│	│		└── room.css  
 │   │   │ 	├── finance/
-│   │	│   │	├── Billing.js  
-│   │   │   │	└── Payments.js
+│   │   │ 	│	├── pages/
+│   │   │ 	│	│   ├── billing.js
+│   │   │ 	│	│   └── payment.js
+│   │   │ 	│	└── services/
+│	│	│	│		└── financeService.js
 │   │   │ 	├── feedback/
-│   │   │   │	└── FeedbackForm.js    
-│   │   │ 	└── services/          
-│   │   │     	└── RoomServices.js        
-│   │	├── components/
-│   │   │	├── common/
-│   │   │   │	├── Navbar.js
-│   │   │   │	├── Footer.js
-│   │   │   │	└── Sidebar.js 
-│   │   │	├── booking/
-│   │   │   │	└── bookingCard.js
-│   │   │	├── room/
-│   │   │   │	└── RoomCard.js
-│   │   │	└── feedback/     
-│   │   │		└── RetingStars.js               
-│   │	├── services/                               # API call abstraction
-│   │   │	├── api.js                              # Axios base instance           
-│   │   │	├── authService.js
-│   │   │	├── bookingService.js
-│   │   │	├── roomService.js
-│   │   │	├── financeService.js
-│   │   │	├── feedbackService.js
-│   │   │	└── serviceRequestService.js                     
-│  	│	├── context/                                # Global state 
-│   │   │	├── authContext.js
-│   │   │	└── BookingContext.js 
-│   │	├── hooks/                                  # Custom Reusable hooks
+│   │   │ 	│	├── pages/
+│   │   │ 	│	│   └── feedbackForm.js
+│   │   │ 	│	├── components/
+│   │   │   │ 	│	└── ratingStars.js
+│   │   │ 	│	└── services/
+│	│	│	│		└── feedbackService.js 
+│   │   │ 	├── services/
+│   │   │ 	│	├── pages/
+│   │   │ 	│	│   └── roomService.js
+│   │   │ 	│	└── services/
+│	│	│	│		└── serviceRequestService.js 
+│   │   │ 	└── dashboard/  
+│   │   │ 	│	├── pages/
+│   │   │ 	│	│   ├── Dashboard.js
+│   │   │ 	│	│   └── StatsWidget.js
+│   │   │ 	│	└── styles/
+│	│	│	│		└── dashboard.css        
+│   │   │     	     
+│   │	├── shared/                                      # Global/Shared modules
+│   │   │	├── components/
+│   │   │   │	├── navbar.js
+│   │   │   │	├── footer.js
+│   │   │   │	└── sidebar.js 
+│   │   │	├── hooks/
+│   │   │   │	├── useForm.js
+│   │   │   │	└── useDebounce.js
+│   │   │	├── styles/
+│   │   │   │	└── main.css
+│   │   │	└── utils/     
+│   │   │   	├── constants.js
+│   │   │		└── validators.js               
+│   │	├── services/                                    # API call abstraction
+│   │   │	└── api.js                     
+│  	│	├── context/                                     # Global state 
+│   │   │	└── globalAppContext.js 
+│   │	├── hooks/                                       # Custom Reusable hooks
 │   │   │	├── useAuth.js
 │   │   │	├── useForm.js
 │   │   │	└── userBooking.js 
-│   │	├── styles/                                 # Global and scoped CSS
+│   │	├── styles/                                      # Global and scoped CSS
 │   │   │	├── main.css
 │   │   │	├── dashboard.css
 │   │   │	└── room.css
-│   │	├── utils/                                  # Utility functions and constants
+│   │	├── utils/                                       # Utility functions and constants
 │   │   │	├── constants.js
 │   │   │	└── validators.js
 │   │   │
-│   ├── uploads/    
-│   └── __tests__/                                  # Client-side uploads (optionsal)
-│       ├── App.test.js 
-│       ├── components/  
-│       │   ├── Navbar.test.js  
-│		│   └── RoomCard.test.js		
-│    	└── pages/
-│   	    ├── Login.test.js  
-│   	    ├── BookingList.test.js
-│           └── FeedbackForm.test.js
-├── .env                                             # Environment variables
+│   └── tests/                                           # Client-side uploads (optionsal)
+│       ├── features/  
+│       │   ├── auth/  
+│		│   │   └── login.test.js		
+│       │   ├── booking/
+│		│	│	└── bookingList.test.js
+│       │   ├── feedback/		
+│		│   │   └── feedbackForm.test.js	
+│       │	└── room/
+│		│       └── roomCard.test.js	
+│    	└── app.test.js
+├── .env                                                # Environment variables
 ├── .gitignore
 ├── package.json
 └── README.md
