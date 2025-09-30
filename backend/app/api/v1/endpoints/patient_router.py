@@ -65,3 +65,4 @@ def delete_patient(
     if not success:
         raise HTTPException(status_code=404, detail="Patient not found")
     return Response(status_code=status.HTTP_204_NO_CONTENT)
+
