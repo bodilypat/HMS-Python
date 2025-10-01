@@ -56,3 +56,4 @@ def delete_guest(
     if not guest:
         raise HTTPException(status_code=404, detail="Guest not found")
     return Response(status_code=status.HTTP_NO_CONTENT)
+
