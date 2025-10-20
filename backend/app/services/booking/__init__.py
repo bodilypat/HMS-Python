@@ -1,14 +1,15 @@
-from .billing_service import service as billing_service
-from .payment_service import service as payment_service
-from .invoice_service import service as invoice_service 
-from .discount_service import service as discount_service
-from .transaction_service import as transaction_service
+#backend/app/api/booking/__init__.py
+
+from .booking_service import service as booking_service 
+from .reservation_service import service as reservation_service 
+from .availability_check_service import service as availability_check_service 
+from .history_service import service as history_service
+
 
 __all__ = [
-  "billing_service",
-  "payment_service",
-  "invoice_service",
-  "discount_service",
-  "transaction_service"
-]
+	"booking_service",
+	"reservation_service",
+    "availability_check_service",
+    "history_service"
+	]
   
