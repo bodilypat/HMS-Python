@@ -1,4 +1,4 @@
-#backend/app/api/feedback/__init__.py
+#backend/app/api/amenities/__init__.py
 
 from .feedback_router import router as feedback_router
 
