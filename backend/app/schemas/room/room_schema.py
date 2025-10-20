@@ -1,48 +1,51 @@
-# backend/app/schemas/room.py
+#app/schemas/room/room_schema.py
 
+from pydantic import BaseModel, Field, condecimal
 from typing import Optional
-from datetime import datetime
+from datetime import datetime 
 from enum import Enum
 
-from pydantic import BaseModel, constr, conint, condecimal-
+class RoomStatusEnum(str, Enum):
+    available = "available"
+    occupied = "occupied"
+    maintenance = "maintenance"
+    reserved = "reserved"
 
-class RoomStatus(str, Enum):
-	available = "Available"
-	occupied = "Occupied"
-	maintenance = "Maintenance" 
-	
-# Base schema for shared fields
-class RoomBase(BassModel):
-	room_number: constr(min_length=1, max_length=10)
-	room_type_id: int 
-	floor_number: conint(ge=0)
-	price_per_night: condecimal(ge=0, max_digits=10, decimal_places=2)
-	room_status: RoomStatus = RoomStatus.available
-	room_description: Optional[str] = None
-	beds_count: conint(gt=0)
-	capacity: conint(ge=1)
+# Base schema shared accorss Create/Read/Update 
+class RoomBase(BaseModel):
+    number: str = Field(..., description="Room number")
+    category_id: Optional[int] = Field(None, description="ID of the room category")
+    floor: Optional[int] = Field(None, description="Floor number")
+    is_available: Optional[bool] = Field(True, description="Is room available?")
+    status: Optiona[RoomStatusEnum] = Field(default=RoomStatusEnum.available)
+    base_price: Optional[condecimal(max_digits=10, decimal_places=2)] = Field(None, description="Base price for the room")
 
-# For creating a new room	
+    class Config:
+        orm_mode = True 
+
+# Create schema
 class RoomCreate(RoomBase):
-	pass
-	
-# For updating room details
+    pass 
+
+# Update schema
 class RoomUpdate(BaseModel):
-	room_number: Optional[constr(min_length=1, max_length=10)] = None
-	room_type_id: Optional[int] = None 
-	floor_number: Optional[conint(ge=0) = None
-	price_per_night: Optional[condecimal(ge=0, max_digits=10, decimal_places=2)] = None 
-	room_status: Optional[RoomStatus] = None 
-    room_description: Optional[str] = None
-	beds_count: optional[conint[gt=0] = None 
-	capacity: Optional[conint(ge=1)] = None 
-    
-# For returing room info
-class RoomOut(BaseModel):
-	room_id: int
-	created_at: datetime
-	updated_at: datetime 
-	
-	class Config:
-		orm_mode: True 
-		
+    number: Optional[str] = None 
+    category: Optional[int] = None 
+    floor: Optional[int] = None 
+    is_available: Optional[bool] = None
+    status: Optional[RoomStatusEnum] = None 
+    base_price: Optional[condecimal(max_digits=10, decimal_places=2)] = None 
+
+    class Config:
+        orm_mode = True 
+
+# Read Schema 
+class RoomRead(RoomBase):
+    id : int 
+    created_at: Optional[datetime] = None 
+    updated_at: Optional[datetime] = None 
+
+    class Config:
+        orm_mode = True 
+
+        
