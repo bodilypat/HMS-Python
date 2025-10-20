@@ -1,61 +1,102 @@
-#app/controllers/core/user_router.py
+#app/api/core/user_router.py
 
-from fastapi import APIRouter, Depends, HTTPException, query, status, Response 
-from sqlalchemy.orm import Session
-from dependancies import get_db
+from fastapi import APIRouter, Depends, HTTPException, Query, status, Response 
+from sqlalchemy.orm import Session 
+from typing import List 
 
-from schemas.core.user import UserCreate, UserRead, UserUpdate
-from services.core.user import UserService
+from app.dependancies import get_db 
+from app.schemas.core.user_schema import UserCreate, UserUpdate, UserRead 
+from app.services.core.user_service import UserService 
 
 router = APIRouter(prefix="/users", tags=["User Management"])
 
-@router.get("/", response_model=List[UserRead], summary="Get a list of User")
-def read_users(
-        skip: int = query(0, ge=0),
-        limit: int = query(10, le=100),
-        db: Session = Depends(get_db)
-    ):
-    return UserService(db).get_all_users(skip, limit)
+# Dependancy to inject UserService with DB Session
+def get_user_service(db: Session = Depends(gt_db)) -> UserService:
+    return UserService(db)
 
-@router.get("/{user_id}", response_model=UserRead, summary="Get a single User by ID")
-def read_user(
-        user_id: int,
-        db: Session = Depends(get_db)
+@router.get(
+        "/",
+        response_model=List[UserRead],
+        summary="List users",
+        response_description="List of users returned successfully"
+    )
+def list_users(
+        skip: int = Query(0, ge=0, description="Number of records to skip"),
+        limit: int = Query(10, le=100, description="Maximum number of records to return"),
+        service: UserService = Depends(get_user_service)
     ):
-    user = UserService(db).get_user_by_id(user_id)
+    """
+    Retrieve a paginated list of users.
+    """
+    return service.get_all_users(skip=skip, limit=limit)
+
+@router.get(
+        "/{user_id}",
+        response_model=UserRead,
+        summary="Get user by ID",
+        response_model="User details retrieved successfully"
+    )
+def get_user_by_id(
+        user_id: int,
+        service: UserService = Depends(get_user_service)
+    ):
+    """
+    Retrieve a user by their unique ID.
+    """
+    user = service.filter(user_id)
     if not user:
-        raise HTTPException(status_code=404, detail="User not found")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
     return user 
 
-@router.post("/", response_model=UserRead, status_code=status.HTTP_201_CREATED, summary="Create a new User")
+@router.post(
+        "/",
+        response_model=UserRead,
+        status_code=status.HTTP_201_CREATED,
+        summary="Create a new user"
+        response_description="User created successfully"
+    )
 def create_user(
-        user_in: UserCreate,
-        db: Session = Depends(get_db)
+        user_info: UserCreate,
+        service: UserService = Depends(get_user_service)
     ):
-    service = UserService(db)
-    if service.get_user_by_email(user_in.email):
-        raise HTTPException(status_code=404, detail="Email already registed")
-    return service.create_user(user_in)
+    if service.get_user_by_email(user_data.email):
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Email already registered")
+    return service.create_user(user_info)
 
-@router.put("/{user_id}", response_model=UserUpdate, summary="Update an existing User")
+@router.put(
+        "/{user_id}",
+        response_model=UserRead,
+        summary="Update a user",
+        response_description="User updated successfully"
+    )
 def update_user(
         user_id: int,
-        updated_user: UserUpdate,
-        db: Session = Depends(get_db)
+        user_data: UserUpdate,
+        service: UserService = Depends(get_user_service)
     ):
-    updated = UserService(db).update_user(user_id, updated_user)
-    if not updated:
-        raise HTTPException(status_code=404, detail="User not found")
-    return updated
+    """
+    Update the information of an existing user.
+    """
+    update_user = service.update_user(user_id, user_data)
+    if not update_user:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
+    return update_user 
 
-@router.delete("/{user_id}", status_code=status.HTTP_204_NO_CONTENT, summary="Delete User")
+@router.delete(
+        "/{user_id}",
+        status_code=status.HTTP_204_NO_CONTENT,
+        summary="Delete a user",
+        response_description="User delete successfully"
+    )
 def delete_user(
         user_id: int,
-        db: Session = Depends(get_db)
+        service: UserService = Depends(get_user_service)
     ):
-    user = UserService(db).delete_user(user_id)
-    if not user:
-        raise HTTPException(status_code=404, detail="User not found")
-    return None 
-
+    """
+    Delete a user by ID.
+    """
+    deleted = service.delete_user(user_id)
+    if not deleted:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
+    return Response(status_code.status.HTTP_204_NO_CONTENT)
 
