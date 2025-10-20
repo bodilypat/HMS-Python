@@ -99,3 +99,5 @@ def delete_guest(
     if not deleted:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Guest not found")
     return Response(status_code=status.HTTP_204_NO_CONTENT)
+
+
