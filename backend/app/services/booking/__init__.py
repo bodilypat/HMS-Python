@@ -12,4 +12,3 @@ __all__ = [
     "availability_check_service",
     "history_service"
 	]
-  
