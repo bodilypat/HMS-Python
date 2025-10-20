@@ -1,60 +1,37 @@
-# backend/app/schemas/user.py 
+#app/models/core/user_schema.py
 
-from pydantic import BaseModel, EmailStr, constr
-from typing import Optional
 from enum import Enum
-from datetime import datetime 
+from typing import Optional 
+from pydantic import BaseModel, EmailStr, Field 
+from datetime import datetime
 
 class UserRole(str, Enum):
-	admin = "Admin"
-	manager = "Manager"
-	receptionist = "Receptionist"
-	staff = "Staff"
-	guest = "Guest"
-	
-class UserStatus(str, Enum):
-	active = "Active"
-	inactive = "Inactive"
-	
-# Shared base schema
-class UserBase(BaseModel):
-	full_name: constr(min_length=1, max_length=100)
-	username: constr(min_length=3, max_length=50)
-	email: EmailStr
-	phone_number: Optional[constr(max_length=20)] = None
-	role: Optional[UserRole] = UserRole.guest
-    status: Optional[UserStatus] = UserStatus.active
+    admin = "Admin"
+    staff = "staff"
+    guest = "guest"
 
-# Schema for updating a new user (includes password)	
+class UserBase(BaseModel):
+    full_name: str = Field(..., max_length=100, description="Full name of the user")
+    email: EmailStr = Field(..., description="Unique email address of the user")
+
 class UserCreate(UserBase):
-	password: constr(min_length=6, max_length=128)
-    
-# Schema for updating existing user fields (all optional)
+    password: str = Field(..., min_length=6, description="User password (will be hashed)")
+    role: UserRole = Field(default=UserRole.guest, description="Role assigned to the user")
+    is_active: Optional[bool] = Field(default=True, description="Is the user account active")
+
 class UserUpdate(BaseModel):
-    full_name: Optional[constr(min_length=1, max_length=100)] = None 
-    username: Optional[constr(min_length=3, max_length=50)] = None
-    email: Optional[EmailStr] = None 
-    phone_number: Optional[constr(max_length=20)] = None
-    role: Optional[UserRole] = None 
-    status: Optional[UserStatus] = None
-    password: Optional[constr(min_length=6, max_length=128)] = None
-    
-# Schema for returning user data to clients
-class UserOut(BaseModel):
-    user_id: int 
-    full_name: str
-    username: str
-    email: EmailStr 
-    phone_number: Optional[str] = None 
+    full_name: Optional[str] = Field(None, max_length=100, description="Updated full name")
+    email: Optional[EmailStr] = Field(None, description="Updated email address")
+    password: Optional[str] = Field(None, min_length=6, description="New password (will be hashed)")
+    role: Optional[UserRole] = Field(None, description="Updated user role")
+    is_active: Optional[bool] = Field(None, description="Aactive/deactivate user")
+
+class UserRead(UserBase):
+    id: str 
     role: UserRole
-    status: UserStatus
-    create_at: datetime 
-    updated_at: datetime 
-    
+    created_at: Optional[datetime] = None
+    updated_at: Optional[datetime] = None
+
     class Config:
         orm_mode = True 
-        
-# Internal schema for accessing hashed passwords
-    class UserInDB(UserOut):
-        password_hash: str 
         

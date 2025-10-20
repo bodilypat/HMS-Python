@@ -1,48 +1,35 @@
-# backend/app/schemas/guest.py
+#app/schemas/core/guest_schema.py
 
-from datetime import date, datetime 
-from enum import Enum
+from pydantic import BaseModel, EmailStr, Field 
 from typing import Optional
-from pydantic import BaseModel, constr, EmailStr 
+from datetime import datetime
 
-class IDType(str, Enum):
-    passport = "Passport"
-    national_id = "National ID"
-    driver_license = "Driver License"
-    
 class GuestBase(BaseModel):
-    first_name: constr(min_length=1, max_length=100)
-    last_name: constr(min_length=1, max_length=100)
-    email: EmailStr 
-    phone_number: Optional[constr(max_length=20)] = None
-    address: Optional[str] = None 
-    id_type: IDType
-    id_number: constr(min_length=3, max_length=50)
-    dob: date 
-    nationality: Optional[constr(max_length=50)]= "Unknown"
-    
-# Schema for creating a guest    
+    full_name: str = Field(..., max_length=100, description="Full name of the guest")
+    email: EmailStr = Field(..., description="Guest's unique email address")
+    phone: Optional[str] = Field(None, max_length=20, description="Phone number of the guest")
+    address: Optional[str] = Field(None, max_length=255, description="Physical address of the guest")
+    role: Optional[str] = Field("guest", max_length=50, description="Role of the user (default: guest )")
+    is_active: Optional[bool] = Field(True, description="Indicates if the guest account is active")
+
 class GuestCreate(GuestBase):
-    pass
-    
-# Schema for updating guest info (all fields optional)
-class GuestUpdate(BaseModel):
-    first_name: Optional[constr(min_length=1, max_length=100)] = None
-    last_name: Optional[constr(min_length=1, max_length=100)] = None
-    email: Optiona[EmailStr] = None
-    phone_number: optional[constr(max_length=20)] = None
-    address: Optional[str] = None
-    id_type: Optional[IDType] = None
-    id_number: Optional[constr(min_length=3, max_length=50) = None
-    dob: Optional[date] = None
-    nationality: Optional[constr(max_length=50)] = None 
-    
-# Schema for returing guest data
-class GuestOut(BaseModel):
-    guest_id: int
-    created_at: datetime
-    updated_at: datetime 
-    
-class Config:
-    orm_mode = True 
-    
+    pass 
+
+class GuestUpdate(GuestModel):
+    full_name: Optional[str] = Field(None, max_length=100, description="Updated full name")
+    email: Optional[EmailStr] = Field(None, description="Updated email address")
+    phone: Optional[str] = Field(None, max_length=20, description="Updated phone number")
+    address: Optional[str] = Field(None, max_length=255, description="Updated address")
+    role: Optional[str] = Field(None, max_length=50, description="Updated role")
+    is_active: Optional[bool] = Field(None, description="Updated active status")
+    password: Optional[str] = Field(None, min_length=8, max_length="128" description="Updated password (will be hashed)")
+
+class GuestRead(GuestBase):
+    id: int 
+    created_at: Optional[datetime] = None 
+    updated_at: Optional[datetime] = None 
+
+    class Config:
+        orm_mode = True 
+
+        

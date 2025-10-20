@@ -1,63 +1,34 @@
-# backend/app/schemas/staff.py
+#app/schemas/core/staff_schema.py
 
-from datetime import date, datetime 
+from pydantic import BaseModel, EmailStr, Field 
 from typing import Optional
-from enum import Enum 
-from pydantic import BaseModel, EmailStr, condecimal, constr, Field 
+from datetime import datetime
 
-# Enum for role
-class StaffRole(str, Enum):
-	receptionist = "Receptionist"
-	housekeeper = "Housekeeper"
-	manager = "Manager" 
-	other = "Other" 
-
-# Enum for status	
-class StaffStatus(str, Emum):
-	active = "Active"
-	inactive = "Inactive"
-    
-# Sheared base schema
 class StaffBase(BaseModel):
-    first_name: constr(min_length=1, max_length=100)
-    last_name: constr(min_length=1, max_length=100)
-    role: StaffRole 
-    email: EmailStr
-    phone_number: Optional[constr(max_length=15)] = None 
-    salary: condecimal(ge=0, max_digits=10, decimal_places=2)
-    hire_date: date
-    status: StaffStatus 
-   
-# For creating staff
+    full_name: str = Field(..., max_length=100, description="Full name of the staff member")
+    email: EmailStr = Field(..., description="unique email address of the member")
+    phone: Optional[str] = Field(None, max_length=20, description="Contact phone number")
+    role: Optional[str] = Field("staff", max_length=50, description="Role/position of teh staff member")
+    is_active: Optional[bool] = Field(True, description="Is the staff member currently active")
+
 class StaffCreate(StaffBase):
-    pass 
-    
-# For updating staff
+    password: str = Field(..., min_length=8, max_length=100, description="Password for the staff member (will be hashed)")
+
+
 class StaffUpdate(BaseModel):
-    first_name: Optional[constr(min_length=1, max_length=100)] = None 
-    last_name: Optional[constr(min_length=1, max_length=100)] = None 
-    role: Optinal[StaffRole] = None 
-    email: Optional[EmailStr] = None 
-    phone_number: Optinal[constr(max_length=15)] = None 
-    salary: Optinal[condecimal[ge=0, max_digits=10, decimal_places=2)] = None 
-    hire_date: Optinal[date] = None 
-    status: Optinal[StaffStatus] = None 
-    
-# Output schema
-class StaffOut(BaseModel):
-    staff_id: int 
-    first_name: str
-    last_name: str
-    role: StaffRole
-    email: EmailStr
-    phone_number: Optinal[str] = None
-    salary: float 
-    hire_date: date 
-    status: StaffStatus
-    created_at: datetime 
-    updated_at: datetime
-    
-class Config: 
-    orm_mode = True 
-    
-    
+    full_name: Optional[str] = Field(None, description="Updated full name")
+    email: Optional[EmailStr] = Field(None, description="Updated email address")
+    phone: Optional[str] = Field(None, max_length=20, description="Update contact phone number")
+    role: Optional[str] = Field(None, max_length=50, description="Updated role")
+    is_active: Optional[bool] = Field(None, description="Updated active status")
+    password:  Optional[str] = Field(None, min_length=8, max_length=128, description="Updated password (will be hashed)")
+
+class StaffRead(StaffBase):
+    id: int 
+    created_at: Optional[datetime] = None
+    updated_at: Optional[datetime] = None 
+
+    class Config: 
+        orm_mode = True 
+
+        
