@@ -1,22 +1,29 @@
 #app/models/booking/availability.py
 
 from sqlalchemy import Column, Integer, Date, Boolean, ForeignKey 
-from sqlalchemy.ext.declarative import declarative_base 
 from sqlalchemy.orm import relationship
-
-Base = declarative_base()
+from db.base import Base 
 
 class Availability(Base):
-    __tablename__="avaiabilities"
-    
+    __tablename__ = "availabilities"
+
     id = Column(Integer, primary_key=True, index=True)
     room_id = Column(Integer, ForeignKey("rooms.id", ondelete="CASCADE"), nullable=False)
 
     available_from = Column(Date, nullable=False)
     available_to = Column(Date, nullable=False)
-    is_availale = Column(Boolean, default=True)
+    is_available = Column(Boolean, default=True)
 
-    room = relationship("Room", back_populates="availabilitities", lazy="joined")
+    room = relationship(
+            "Room",
+            book_populates="availabilities",
+            lazy='joined'
+    )
 
     def __repr__(self):
-        return f"<Availability(room_id={self.room_id}, from={self.available_from}, to={self.available_to}, available={self.is_availale})"
+        return (
+            f"<Availability(id={self.id}, room_id={self.room_id},"
+            f"from={self.available_from}, to={self.available_to},"
+            f"available={self.is_available})>"
+            )
+        
