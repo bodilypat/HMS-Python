@@ -1,10 +1,9 @@
-# backend/app/models/amenities/__init__.py
-from . import User 
-from .guest import Guest 
-from .staff import Staff 
+# backend/app/models/core/__init__.py
+from .hotel_amenity import HotelAmenity 
+from .room_amenity import RoomAmenity 
+
 
 __all__ = [
-	"User",
-	"Guest",
-	"Staff",
+	"HotelAmenity",
+	"RoomAmenity",
 ]
