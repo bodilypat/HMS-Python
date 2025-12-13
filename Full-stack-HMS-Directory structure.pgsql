@@ -72,7 +72,7 @@ backend/
 │   │   └── reports/
 │   │       ├── __init__.py
 │   │       └── report_service.py  
-│   │                            
+│   │                              
 │   ├── models/                                  
 │   │   ├── __init__.py                          
 │   │   ├── auth/                         
