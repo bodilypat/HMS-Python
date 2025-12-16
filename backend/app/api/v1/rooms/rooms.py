@@ -1,85 +1,121 @@
 #app/api/v1/rooms/rooms.py
 
-from fastapi import APIRouter, Depends, Query
-from typing import Optional, List 
+"""
+CRUD endpoints for managing rooms in the Hotl Management System.
+Includes creating, reading and updating, and deleting rooms.
+"""
 
-from app.schemas.rooms import RoomCreate, RoomUpdate, RoomResponse 
-from app.sevices.rooms.room_service import RoomService 
+from fastapi import APIRouter, HTTPException, Depends, status
+from sqlalchemy.orm import Session
+from typing import List
+
+from app.database import get_db
+from app.schemas.rooms.room import RoomCreate, RoomResponse, RoomUpdate
+from app.services.rooms.room_service import RoomService
 
 router = APIRouter()
+room_service = RoomService()
 
-#--------------------------------------
-# Get All Rooms 
-#--------------------------------------
-@router.get("/", response_model=List[RoomResponse])
-async def get_all_rooms(
-    page: int = Query(1, ge=1),
-    page_size: int = Query(20, ge=1, le=100),
-    room_type_id: Optional[int] = None,
-    status: Optional[str] = None,
-    room_service: RoomService = Depends()
-):
-    """ 
-    Retrieve all rooms with optional filters and pagination.
-    """
-    return await service.get_all_rooms(
-        page=page,
-        page_size=page_size,
-        room_type_id=room_type_id,
-        status=status 
+#-----------------------------
+# Endpoint to create a new room
+#-----------------------------
+@router.post(
+        "/rooms/", 
+        response_model=RoomResponse, 
+        status_code=status.HTTP_201_CREATED
     )
+def create_room(
+        room: RoomCreate, 
+        db: Session = Depends(get_db)
+    ):
+    """
+    Create a new room.
+    """
+    db_room = room_service.create_room(db, room)
+    if db_room is None:
+        raise HTTPException(status_code=400, detail="Room could not be created.")
+    return db_room
 
-#------------------------------
-# Get Room by ID
-#------------------------------
-@router.get("/{room_id}", response_model=RoomResponse)
-async def get_room_by_id(
-    room_id: int,
-    room_service: RoomService = Depends()
-):
+#-----------------------------
+# Endpoint to get all rooms
+#-----------------------------
+@router.get(
+        "/rooms/", 
+        response_model=List[RoomResponse], 
+        status_code=status.HTTP_200_OK
+    )
+def get_rooms(
+        skip: int = 0,
+        limit: int = 10,
+        db: Session = Depends(get_db)
+    ):
+    """
+    Retrieve all rooms.
+    """
+    rooms = room_service.get_all_rooms(db, skip=skip, limit=limit)
+    return rooms
+
+#-----------------------------
+# Endpoint to get a room by ID
+#-----------------------------
+@router.get(
+        "/rooms/{room_id}", 
+        response_model=RoomResponse, 
+        status_code=status.HTTP_200_OK
+    )
+def get_room_by_id(
+        room_id: int, 
+        db: Session = Depends(get_db)
+    ):
     """
     Retrieve a room by its ID.
     """
-    return await room_service.get_room_by_id(room_id=room_id)
-#-------------------------------
-# Create a Room
-#-------------------------------
-@router.post("/", response_model=RoomResponse)
-async def create_room(
-    room: RoomCreate,
-    room_service: RoomService = Depends()
-):
-    """ 
-    Create a new room with the provided details.
-    """
-    return await room_service.create_room(room=room)
+    db_room = room_service.get_room_by_id(db, room_id)
+    if db_room is None:
+        raise HTTPException(status_code=404, detail="Room not found.")
+    return db_room
 
-#-------------------------------
-# Update a Room
-#-------------------------------
-@router.put("/{room_id}", response_model=RoomResponse)
-async def update_room(
-    room_id: int,
-    room: RoomUpdate,
-    room_service: RoomService = Depends()
-):
-    """
-    Update an existing room with the provided details.
-    """
-    return await room_service.update_room(room_id=room_id, room=room)
+#-----------------------------
+# Endpoint to update a room by ID
+#-----------------------------
+@router.put(
+        "/rooms/{room_id}", 
+        response_model=RoomResponse, 
+        status_code=status.HTTP_200_OK
+    )
+def update_room(
 
-#-------------------------------
-# Delete a Room
-#-------------------------------
-@router.delete("/{room_id}", response_model=RoomResponse)
-async def delete_room(
-    room_id: int,
-    room_service: RoomService = Depends()
-):
+        room_id: int, 
+        room: RoomUpdate, 
+        db: Session = Depends(get_db)
+    ):
+    """
+    Update a room by its ID.
+    """
+    db_room = room_service.update_room(db, room_id, room)
+    if db_room is None:
+        raise HTTPException(status_code=404, detail="Room not found.")
+    return db_room
+
+#-----------------------------
+# Endpoint to delete a room by ID
+#-----------------------------
+@router.delete(
+        "/rooms/{room_id}", 
+        status_code=status.HTTP_204_NO_CONTENT
+    )
+def delete_room(
+        room_id: int, 
+        db: Session = Depends(get_db)
+    ):
     """
     Delete a room by its ID.
     """
-    await room_service.delete_room(room_id=room_id)
-    return {"message": "Room deleted successfully"}
+    success = room_service.delete_room(db, room_id)
+    if not success:
+        raise HTTPException(status_code=404, detail="Room not found.")
+    return None
+
+
 
 
