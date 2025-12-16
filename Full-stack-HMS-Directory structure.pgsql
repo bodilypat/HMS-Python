@@ -9,27 +9,87 @@ backend/
 │   │   ├── database.py
 │   │   ├── security.py
 │   │   ├── loggers.py
-│   │   └── exceptions.py          
-│   ├── api/                                                # REST endpoints      
+│   │   └── exceptions.py      
+│   ├── models/                                        # SQLAlchemy  models (tables)
+│   │   ├── base.py                          
+│   │   ├── user.py                       
+│   │   ├── room_type.py                        
+│   │   ├── amenity.py            
+│   │   ├── room.py   
+│   │   ├── booking.py
+│   │   ├── payment.py
+│   │   ├── guest.py       
+│   │   ├── staff.py 
+│   │   ├── hotel_service.py                       
+│   │   └── billing.py     
+│   ├── services/                                         # Business Logic                        
+│   │   ├── auth/
+│   │   │   └── auth_service.py                                            
+│   │   ├── rooms/  
+│   │   │   ├── room_service.py
+│   │   │   ├── room_type_service.py
+│   │   │   ├── amenity_service.py
+│   │   │   └── availability_service.py                                   
+│   │   ├── bookings/ 
+│   │   │   ├── booking_service.py
+│   │   │   ├── payment_service.py
+│   │   │   └── representation_service.py                             
+│   │   ├── guests/  
+│   │   │   └── guest_service.py                             
+│   │   ├── staff/
+│   │   │   └── staff_service.py
+│   │   ├── hotel_services/
+│   │   │   └── hotel_service.py
+│   │   ├── billings/ 
+│   │   │   └── billing_service.py          
+│   │   ├── reports/ 
+│   │   │   └── report_service.py                            
+│   │   └── common/
+│   │       ├── exceptions.py
+│   │       └── validators.py   
+│   ├── schemas/                                   # Pydantic models(validation & serialization)
+│   │   ├── auth/  
+│   │   │   ├── token.py
+│   │   │   └── user.py            
+│   │   ├── rooms/ 
+│   │   │   ├── room.py
+│   │   │   ├── room_type.py
+│   │   │   ├── amenity.py                      
+│   │   │   └── availability.py                   #
+│   │   ├── bookings/  
+│   │   │   ├── booking.py
+│   │   │   ├── payments.py
+│   │   │   └── representation.py                               
+│   │   ├── guests/  
+│   │   │   └── guest.py                          
+│   │   ├── staff/
+│   │   │   └── staff.py        
+│   │   ├── hotel_services/
+│   │   │   └── service.py         
+│   │   ├── billings/ 
+│   │   │   └── billing.py                               
+│   │   └── reports/  
+│   │       └── report.py  
+│   ├── api/                                                # FastAPI Router (API layer) endpoints      
 │   │   ├── v1/
 │   │   │   ├── auth.py
 │   │   │   │   ├── router.py
-│   │   │   │   └── deoendencies.py
+│   │   │   │   └── dependencies.py
 │   │   │   ├── rooms/
 │   │   │   │   ├── router.py
 │   │   │   │   ├── rooms.py
 │   │   │   │   ├── room_types.py
 │   │   │   │   ├── amenities.py
 │   │   │   │   └── availability.py
-│   │   │   ├── bookings.py     
+│   │   │   ├── bookings/     
 │   │   │   │   ├── router.py
 │   │   │   │   ├── bookings.py
 │   │   │   │   ├── representation.py
 │   │   │   │   └── payments.py
-│   │   │   ├── guests.py  
+│   │   │   ├── guests/ 
 │   │   │   │   ├── router.py
 │   │   │   │   └── guests.py     
-│   │   │   ├── staff.py 
+│   │   │   ├── staff/
 │   │   │   │   ├── router.py
 │   │   │   │   └── staff.py 
 │   │   │   ├── services/
@@ -43,72 +103,16 @@ backend/
 │   │   │   │   └── reports.py    
 │   │   │   └── __init__.py   
 │   │   │                                                        
-│   │   └── api_router.py      
-│   │  
-│   ├── models/                                        # SQLAlchemy  models (tables)
-│   │   ├── base.py                          
-│   │   ├── auth.py                       
-│   │   ├── rooms.py                          
-│   │   ├── bookings.py              
-│   │   ├── guests.py          
-│   │   ├── staff.py
-│   │   ├── hotel_services.py
-│   │   ├── billings.py                                  
-│   │   └── reports.py    
-│   │                   
-│   ├── schemas/                                      # Pydantic models(validation & serialization)
-│   │   ├── common.py                          
-│   │   ├── auth.py                                
-│   │   ├── rooms.py                           
-│   │   ├── bookings.py                      
-│   │   ├── guests.py                  
-│   │   ├── staff.py
-│   │   ├── services
-│   │   ├── billings                            
-│   │   └── reports   
-│   │  
-│   ├── crud/                                           # Database Logic 
-│   │   ├── base.py                          
-│   │   ├── auth.py                       
-│   │   ├── rooms.py                          
-│   │   ├── bookings.py              
-│   │   ├── guests.py          
-│   │   ├── staff.py
-│   │   ├── hotel_services.py
-│   │   ├── billings.py                                  
-│   │   └── reports.py   
-│   │                                  
-│   ├── services/                                    # Business Logic
-│   │   ├── __init__.py                          
-│   │   ├── auth/
-│   │   │   ├── auth_service.py
-│   │   │   └── token_service.py                                            
-│   │   ├── rooms/  
-│   │   │   ├── room_service.py
-│   │   │   ├── room_type_service.py
-│   │   │   ├── amenity_service.py
-│   │   │   └── availability_service.py                                   
-│   │   ├── bookings/ 
-│   │   │   ├── booking_service.py
-│   │   │   ├── reservation_service.py
-│   │   │   └── payment_service.py                             
-│   │   ├── guests/  
-│   │   │   └── guest_service.py                             
-│   │   ├── staff/
-│   │   │   └── staff_service.py
-│   │   ├── hotel_services/
-│   │   │   ├── additional_service.py
-│   │   │   └── room_service_log.py
-│   │   ├── billings/ 
-│   │   │   └── billing_service.py                                    
-│   │   └── reports/
-│   │       └── report_service.py  
-│   │                              
+│   │   └── api_router.py     
+│   ├── db/                         
+│   │   ├── session.py                                  # DB contaction
+│   │   ├── datetime.py
+│   │   └── base.py
 │   ├── utils/                         
 │   │   ├── pagination.py
 │   │   ├── datetime.py
-│   │   └── helpers.py
-│   │
+│   │   └── helpers.py 
+│   │          
 │   ├── events/                         
 │   │   ├── auth_middleware.py
 │   │   └── rate_limit.py
